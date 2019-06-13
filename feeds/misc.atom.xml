@@ -7,7 +7,7 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed&lt;/p&gt;</content><category term="python"></category></entry><entry><title>Third Blog</title><link href="https://mtruongn93.github.io/blog/blog_2.html" rel="alternate"></link><published>2011-03-29T10:30:00-04:00</published><updated>2011-03-29T10:30:00-04:00</updated><author><name>Minh</name></author><id>tag:mtruongn93.github.io,2011-03-29:/blog/blog_2.html</id><summary type="html">&lt;p&gt;&lt;img src="http://imgur.com/1ZcRyrc.png" style="float: left; margin: 20px; height: 55px"&gt;&lt;/p&gt;
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed&lt;/p&gt;</content><category term="python"></category></entry><entry><title>Third Blog</title><link href="https://mtruongn93.github.io/blog/blog_3.html" rel="alternate"></link><published>2011-03-29T10:30:00-04:00</published><updated>2011-03-29T10:30:00-04:00</updated><author><name>Minh</name></author><id>tag:mtruongn93.github.io,2011-03-29:/blog/blog_3.html</id><summary type="html">&lt;p&gt;&lt;img src="http://imgur.com/1ZcRyrc.png" style="float: left; margin: 20px; height: 55px"&gt;&lt;/p&gt;
 &lt;h1&gt;Train-Test Split and Cross-Validation Lab&lt;/h1&gt;
 &lt;hr&gt;
 &lt;h2&gt;Review of Train/Test Validation Methods&lt;/h2&gt;
