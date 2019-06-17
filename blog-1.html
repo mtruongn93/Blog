@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <title>List Comprehension</title>
+ <!-- Latest compiled and minified CSS -->
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+ <div class="container">
+  <h1><a href="https://mtruongn93.github.io/blog">Truong</a></h1>
+ </div>
+</head>
+<body>
+ <div class="container">
+<div class="row">
+ <div class="col-md-8">
+  <h3>List Comprehension</h3>
+  <label>2019-06-16</label>
+  <p>If you are a new Python user, or a loop addicted user, it's time for you to consider to change to something new, something that makes your code run faster, and look much better.</p>
+<p>Introducing <strong>List Comprehension</strong></p>
+<h2>What is List Comprehension ?</h2>
+<p>List comprehension is just a succint and elegant way for people to create a new list where every element in the list is created based on a certain rule</p>
+<p>Let's take a look at an example. </p>
+<p>Imagine we are having a list of numbers, and we are trying to create a new list, containing the square root of every elemnet in the existing loop. Normally, a lot of programmer will do like this :</p>
+<div class="highlight"><pre><span></span><span class="n">existing_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="mi">25</span><span class="p">,</span><span class="mi">36</span><span class="p">,</span><span class="mi">49</span><span class="p">,</span><span class="mi">64</span><span class="p">,</span><span class="mi">81</span><span class="p">,</span><span class="mi">100</span><span class="p">]</span>
+
+<span class="c1"># Create an empty list</span>
+<span class="n">sqrt_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Make a for loop and apply the square root to each element in the existing_list</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">existing_list</span><span class="p">:</span>
+    <span class="c1"># append the newly calculated elements to the empty list</span>
+    <span class="n">sqrt_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">sqrt_list</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">.</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+
+<p>Obviously, there is nothing wrong with doing this way. However, list comprehension can greatly reduce the length of the code above.</p>
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="n">i</span><span class="o">**</span> <span class="mf">0.5</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">existing_list</span><span class="p">]</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">.</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+
+<h2>Why is List Comprehension better than traditonal Loop ?</h2>
+<p><code>Good programmers write code that humans can understand. 
+                                           Martin Fowler</code></p>
+<p>List comprehension clearly makes our code much more readable and shorter than traditional loop. As we can see from the code above, it reduces 3 lines of code into 1. Anyone with a basic understanding of list comprehension can easily understand it.</p>
+<p>In addition, list comprehension is also faster than traditional loop. One of the reason is that it doesn't need to load the append attribute of the list and call it as a function at each iteration</p>
+<h2>How do we write a list comprehension ?</h2>
+<p>I used to know a lot of people having hard time with using list comprehension as they are too comfortable with using traditonal loop; and hence, less willing to change.</p>
+<p>To be honest, creating a list comprehension is even easier than making a traditional loop as you do not even need to use .append.</p>
+<p>Normally, the format of a list comprehension will be : <code>[expression for item in list]</code></p>
+<p><code>Expression</code> is just the method that you want to transform each element of your list</p>
+<p><code>item</code> is each element in your list</p>
+<h2>Type of List Comprehension</h2>
+<h3>1. Unconditional List Comprehension</h3>
+<p>We have a list of name, and we want to captitalize all the letters of every name in the list</p>
+<div class="highlight"><pre><span></span><span class="n">string_name</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;max&quot;</span><span class="p">,</span> <span class="s2">&quot;minh&quot;</span><span class="p">,</span> <span class="s2">&quot;megan&quot;</span><span class="p">,</span> <span class="s2">&quot;cody&quot;</span><span class="p">,</span> <span class="s2">&quot;blair&quot;</span><span class="p">,</span> <span class="s2">&quot;lucas&quot;</span><span class="p">,</span> <span class="s2">&quot;sarah&quot;</span><span class="p">,</span> <span class="s2">&quot;vishal&quot;</span><span class="p">]</span>
+
+<span class="c1"># traditional loop</span>
+<span class="n">capital_name</span> <span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">string_name</span><span class="p">:</span>
+    <span class="n">capital_name</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+
+<span class="n">capital_name</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;MAX&#39;</span><span class="p">,</span> <span class="s1">&#39;MINH&#39;</span><span class="p">,</span> <span class="s1">&#39;MEGAN&#39;</span><span class="p">,</span> <span class="s1">&#39;CODY&#39;</span><span class="p">,</span> <span class="s1">&#39;BLAIR&#39;</span><span class="p">,</span> <span class="s1">&#39;LUCAS&#39;</span><span class="p">,</span> <span class="s1">&#39;SARAH&#39;</span><span class="p">,</span> <span class="s1">&#39;VISHAL&#39;</span><span class="p">]</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="c1"># list comprehension</span>
+<span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">string_name</span><span class="p">]</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;MAX&#39;</span><span class="p">,</span> <span class="s1">&#39;MINH&#39;</span><span class="p">,</span> <span class="s1">&#39;MEGAN&#39;</span><span class="p">,</span> <span class="s1">&#39;CODY&#39;</span><span class="p">,</span> <span class="s1">&#39;BLAIR&#39;</span><span class="p">,</span> <span class="s1">&#39;LUCAS&#39;</span><span class="p">,</span> <span class="s1">&#39;SARAH&#39;</span><span class="p">,</span> <span class="s1">&#39;VISHAL&#39;</span><span class="p">]</span>
+</pre></div>
+
+
+<h3>2. Conditional List Comprehension</h3>
+<p>Assuming we have a string like this: "hello everyone". We want to have a list of unique non-vowel letters in this string</p>
+<div class="highlight"><pre><span></span><span class="n">string_hello</span> <span class="o">=</span> <span class="s2">&quot;hello everyone&quot;</span>
+<span class="n">vowels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span><span class="s2">&quot;e&quot;</span><span class="p">,</span><span class="s2">&quot;i&quot;</span><span class="p">,</span><span class="s2">&quot;o&quot;</span><span class="p">,</span><span class="s2">&quot;u&quot;</span><span class="p">]</span>
+
+<span class="c1"># traditional loop</span>
+<span class="n">non_vowel_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">string_hello</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">vowels</span> <span class="ow">and</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">non_vowel_list</span><span class="p">:</span> 
+        <span class="n">non_vowel_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+<span class="n">non_vowel_list</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="s1">&#39;l&#39;</span><span class="p">,</span> <span class="s1">&#39;v&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;n&#39;</span><span class="p">]</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="c1"># list comprehension</span>
+<span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">string_hello</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">vowels</span><span class="p">])</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="nb">array</span><span class="p">([</span><span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="s1">&#39;l&#39;</span><span class="p">,</span> <span class="s1">&#39;n&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;v&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;&lt;U1&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Let's look at a more complicated case with an if-else statement. </p>
+<div class="highlight"><pre><span></span><span class="c1"># if the number in the list is the multiple of 3, we change in to 3, else double it</span>
+
+<span class="n">num_string</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">12</span><span class="p">]</span>
+
+<span class="c1"># traditional loop</span>
+<span class="n">num_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">num_string</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">num_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="k">else</span> <span class="p">:</span>
+        <span class="n">num_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">num_list</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="c1"># list comprehension</span>
+<span class="p">[</span><span class="mi">3</span> <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">i</span><span class="o">*</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">num_string</span><span class="p">]</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</pre></div>
+
+
+<h3>3. Nested List Comprehension</h3>
+<p>Now, since we are a bit better at list comprehension, we are going to do a more advanced stuff : list comprehension with nested loop.</p>
+<div class="highlight"><pre><span></span><span class="c1"># return a list of string with length &gt; 10</span>
+
+<span class="n">club_string</span> <span class="o">=</span> <span class="p">[[</span><span class="s2">&quot;Manchester United&quot;</span><span class="p">,</span> <span class="s2">&quot;Liverpool&quot;</span><span class="p">,</span> <span class="s2">&quot;Chelsea&quot;</span><span class="p">],</span>
+               <span class="p">[</span><span class="s2">&quot;Real Marid&quot;</span><span class="p">,</span> <span class="s2">&quot;Barcelona&quot;</span><span class="p">,</span> <span class="s2">&quot;Valencia&quot;</span><span class="p">]]</span>
+
+<span class="n">club_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># traditional loop</span>
+<span class="k">for</span> <span class="n">leauge</span> <span class="ow">in</span> <span class="n">club_string</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">club</span> <span class="ow">in</span> <span class="n">leauge</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">club</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
+            <span class="n">club_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">club</span><span class="p">)</span>
+
+<span class="n">club_list</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;Manchester United&#39;</span><span class="p">]</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="c1"># list comprehension</span>
+<span class="p">[</span><span class="n">club</span> 
+ <span class="k">for</span> <span class="n">leauge</span> <span class="ow">in</span> <span class="n">club_string</span> 
+ <span class="k">for</span> <span class="n">club</span> <span class="ow">in</span> <span class="n">leauge</span>
+ <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">club</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">]</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;Manchester United&#39;</span><span class="p">]</span>
+</pre></div>
+
+
+<p><strong>DO NOT OVERUSE LIST COMPREHENSION</strong></p>
+<p>One of the purpose of writing list comprehension is better readability. Cramping everything inside the list comprehension will make thing even worse than traditional loop. For example:</p>
+<div class="highlight"><pre><span></span><span class="c1"># return a list of number staying within a list of number with length of less than 3 and multiple this</span>
+<span class="c1"># number by 2 if it is odd or by 3 if it is even</span>
+
+<span class="n">number_list</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span>
+               <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span>
+               <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]]</span>
+
+<span class="p">[</span><span class="n">number</span><span class="o">*</span><span class="mi">2</span> <span class="k">if</span> <span class="n">number</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">number</span><span class="o">*</span><span class="mi">3</span> <span class="k">for</span> <span class="n">list_</span> <span class="ow">in</span> <span class="n">number_list</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">list_</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">list_</span><span class="p">]</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">18</span><span class="p">]</span>
+</pre></div>
+
+
+<p>The first way that we can fix it is to break the line</p>
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="n">number</span><span class="o">*</span><span class="mi">2</span> 
+ <span class="k">if</span> <span class="n">number</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span> 
+ <span class="k">else</span> <span class="n">number</span><span class="o">*</span><span class="mi">3</span> 
+ <span class="k">for</span> <span class="n">list_</span> <span class="ow">in</span> <span class="n">number_list</span> 
+ <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">list_</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span> 
+ <span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">list_</span><span class="p">]</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">18</span><span class="p">]</span>
+</pre></div>
+
+
+<p>Another way to make the code look easier is to create an extra function</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">num_condition</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">num</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">num</span><span class="o">*</span><span class="mi">2</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">num</span><span class="o">*</span><span class="mi">3</span>
+
+<span class="p">[</span><span class="n">num_condition</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="k">for</span> <span class="n">list_</span> <span class="ow">in</span> <span class="n">number_list</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">list_</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">list_</span><span class="p">]</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">18</span><span class="p">]</span>
+</pre></div>
+
+
+<h2>Dictionary Comprehension</h2>
+<p>Knowing how to write a list comprehension is smiliar to "buy 1 get 1" as you will be able to write a dictionary comprehension.</p>
+<p>Similar to list comprehension, dictionary comprehension is a concise, and fast way to produce a new dictionary where every key and value are based on a certain rule.</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="n">city_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;city&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Toronto&quot;</span><span class="p">,</span><span class="s2">&quot;Waterloo&quot;</span><span class="p">,</span> <span class="s2">&quot;Toronto&quot;</span><span class="p">,</span> <span class="s2">&quot;Vancouver&quot;</span><span class="p">,</span> <span class="s2">&quot;Waterloo&quot;</span><span class="p">],</span>
+                        <span class="s2">&quot;house_price&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="mi">1000000</span><span class="p">,</span><span class="mi">500000</span><span class="p">,</span><span class="mi">700000</span><span class="p">,</span><span class="mi">800000</span><span class="p">,</span><span class="mi">600000</span><span class="p">]})</span>
+<span class="n">city_df</span>
+</pre></div>
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>city</th>
+      <th>house_price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Toronto</td>
+      <td>1000000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Waterloo</td>
+      <td>500000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Toronto</td>
+      <td>700000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Vancouver</td>
+      <td>800000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Waterloo</td>
+      <td>600000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>For example, we have a dataframe as shown above, and we want to get a dictionary showing the average house price of each city. The way to write a dictionary comprehension is really similar to write a list comprehension. The only difference is that we need to have values and keys for the output</p>
+<div class="highlight"><pre><span></span><span class="n">city</span> <span class="o">=</span> <span class="n">city_df</span><span class="o">.</span><span class="n">city</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="p">{</span><span class="n">i</span> <span class="p">:</span> <span class="p">(</span><span class="n">city_df</span><span class="o">.</span><span class="n">house_price</span><span class="p">[</span><span class="n">city_df</span><span class="o">.</span><span class="n">city</span> <span class="o">==</span> <span class="n">i</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">city</span><span class="p">}</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="err">{</span><span class="s1">&#39;Toronto&#39;</span><span class="p">:</span> <span class="mi">850000</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;Waterloo&#39;</span><span class="p">:</span> <span class="mi">550000</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;Vancouver&#39;</span><span class="p">:</span> <span class="mi">800000</span><span class="p">.</span><span class="mi">0</span><span class="err">}</span>
+</pre></div>
+ </div>
+</div>
+ </div>
+</body>
+</html>
