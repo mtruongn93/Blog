@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <title>Pipeline</title>
+ <!-- Latest compiled and minified CSS -->
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+ <div class="container">
+  <h1><a href="https://mtruongn93.github.io/blog">Truong</a></h1>
+ </div>
+</head>
+<body>
+ <div class="container">
+<div class="row">
+ <div class="col-md-8">
+  <h3>Pipeline</h3>
+  <label>2019-07-04</label>
+  <div class="highlight"><pre><span></span><span class="c1"># Importing library</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">make_pipeline</span>
+<span class="kn">from</span> <span class="nn">sklearn.base</span> <span class="kn">import</span> <span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">TransformerMixin</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>In data science, one of the most tedious step that we need to perform is feature engineering and modeling. These steps are very repetitve. Luckily, creating a <strong>pipeline</strong> can help us solve this problem.</p>
+<h1>What is a pipeline ?</h1>
+<p>In a simple term, pipeline is a tool in sklearn package for us to compose multiple estimators. For example, when we want to analyse a dataset, we may need to choose the features (columns) that we want, standardize them and apply the model. All of these steps can be escapulated in a <code>Pipeline</code> </p>
+<p>Assuming we have a dataset like the one below, and we want to predict which food a person wants to eat based on their gender, age, height, weight and an unknown feature "empty_col".</p>
+<div class="highlight"><pre><span></span><span class="n">gender</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;male&quot;</span><span class="p">,</span><span class="s2">&quot;female&quot;</span><span class="p">]</span>
+<span class="n">food</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Viet&quot;</span><span class="p">,</span> <span class="s2">&quot;Thai&quot;</span><span class="p">,</span> <span class="s2">&quot;Chinese&quot;</span><span class="p">,</span> <span class="s2">&quot;Western&quot;</span><span class="p">]</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">data1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;gender&quot;</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">gender</span><span class="p">,</span><span class="mi">20</span><span class="p">),</span>
+                      <span class="s2">&quot;age&quot;</span> <span class="p">:</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">60</span><span class="p">),</span><span class="mi">20</span><span class="p">),</span>
+                      <span class="s2">&quot;height&quot;</span> <span class="p">:</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span><span class="mi">170</span><span class="p">),</span><span class="mi">20</span><span class="p">),</span>
+                      <span class="s2">&quot;weight&quot;</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span><span class="mi">250</span><span class="p">,</span><span class="mi">20</span><span class="p">),</span>
+                      <span class="s2">&quot;empty_col&quot;</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span><span class="mi">20</span><span class="p">),</span>
+                      <span class="s2">&quot;food&quot;</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">food</span><span class="p">,</span><span class="mi">20</span><span class="p">)})</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">data1</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+        width: 50%;
+        background-color: #f2f2f2;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+        width: 50%;
+        background-color: #4CAF50;
+        color: white;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>gender</th>
+      <th>age</th>
+      <th>height</th>
+      <th>weight</th>
+      <th>empty_col</th>
+      <th>food</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>male</td>
+      <td>58</td>
+      <td>167</td>
+      <td>213.127056</td>
+      <td>None</td>
+      <td>Western</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>male</td>
+      <td>55</td>
+      <td>151</td>
+      <td>161.579091</td>
+      <td>None</td>
+      <td>Chinese</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>female</td>
+      <td>40</td>
+      <td>164</td>
+      <td>227.105995</td>
+      <td>None</td>
+      <td>Chinese</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>female</td>
+      <td>54</td>
+      <td>155</td>
+      <td>223.072513</td>
+      <td>None</td>
+      <td>Western</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>female</td>
+      <td>33</td>
+      <td>158</td>
+      <td>248.173858</td>
+      <td>None</td>
+      <td>Viet</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="highlight"><pre><span></span><span class="n">data1</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="k">class</span> <span class="s1">&#39;pandas.core.frame.DataFrame&#39;</span><span class="o">&gt;</span>
+<span class="n">RangeIndex</span><span class="p">:</span> <span class="mi">20</span> <span class="n">entries</span><span class="p">,</span> <span class="mi">0</span> <span class="k">to</span> <span class="mi">19</span>
+<span class="k">Data</span> <span class="n">columns</span> <span class="p">(</span><span class="n">total</span> <span class="mi">6</span> <span class="n">columns</span><span class="p">):</span>
+<span class="n">gender</span>       <span class="mi">20</span> <span class="n">non</span><span class="o">-</span><span class="k">null</span> <span class="k">object</span>
+<span class="n">age</span>          <span class="mi">20</span> <span class="n">non</span><span class="o">-</span><span class="k">null</span> <span class="n">int64</span>
+<span class="n">height</span>       <span class="mi">20</span> <span class="n">non</span><span class="o">-</span><span class="k">null</span> <span class="n">int64</span>
+<span class="n">weight</span>       <span class="mi">20</span> <span class="n">non</span><span class="o">-</span><span class="k">null</span> <span class="n">float64</span>
+<span class="n">empty_col</span>    <span class="mi">0</span> <span class="n">non</span><span class="o">-</span><span class="k">null</span> <span class="k">object</span>
+<span class="n">food</span>         <span class="mi">20</span> <span class="n">non</span><span class="o">-</span><span class="k">null</span> <span class="k">object</span>
+<span class="n">dtypes</span><span class="p">:</span> <span class="n">float64</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">int64</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="k">object</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">memory</span> <span class="k">usage</span><span class="p">:</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="o">+</span> <span class="n">KB</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">X_train</span> <span class="o">=</span> <span class="n">data1</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;food&quot;</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">data1</span><span class="p">[</span><span class="s2">&quot;food&quot;</span><span class="p">]</span>
+</pre></div>
+
+
+<p>Let's say, for some reasons, the person analyzing this dataset only wants to use features <code>age, height, weight, and empty_col</code> to predict the food.</p>
+<div class="highlight"><pre><span></span><span class="n">X_train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;gender&quot;</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>age</th>
+      <th>height</th>
+      <th>weight</th>
+      <th>empty_col</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>58</td>
+      <td>167</td>
+      <td>213.127056</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>55</td>
+      <td>151</td>
+      <td>161.579091</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>40</td>
+      <td>164</td>
+      <td>227.105995</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>54</td>
+      <td>155</td>
+      <td>223.072513</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>33</td>
+      <td>158</td>
+      <td>248.173858</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>56</td>
+      <td>150</td>
+      <td>236.798867</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>32</td>
+      <td>153</td>
+      <td>170.120662</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>42</td>
+      <td>163</td>
+      <td>196.733247</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>36</td>
+      <td>159</td>
+      <td>231.915150</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>22</td>
+      <td>162</td>
+      <td>190.901033</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>45</td>
+      <td>154</td>
+      <td>192.580001</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>21</td>
+      <td>157</td>
+      <td>215.189645</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>43</td>
+      <td>165</td>
+      <td>225.999820</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>24</td>
+      <td>152</td>
+      <td>160.628936</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>51</td>
+      <td>166</td>
+      <td>195.947550</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>48</td>
+      <td>161</td>
+      <td>177.813970</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>34</td>
+      <td>169</td>
+      <td>231.051503</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>49</td>
+      <td>160</td>
+      <td>235.308763</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>25</td>
+      <td>168</td>
+      <td>196.450121</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>37</td>
+      <td>156</td>
+      <td>231.366207</td>
+      <td>None</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>The method shown above is one way to do it. However, imagine that we need to do it for so many datasets, it will become extremely tedious. In addition, when our datasets are getting more complicated, doing that way repetitively will make our code become hard to read. We are going to create a class that can automate that process, and can be put in a pipeline</p>
+<h1>Custom Transformers</h1>
+<p>There are multiple written Transformers in Python such as StandardScaler, and LabelBinarizer. However, during our feature engineering, we usually need to write our own transformers. Here is the general template for a custom transformers:</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyTransformer</span><span class="p">(</span><span class="n">TransformerMixin</span><span class="p">,</span> <span class="n">BaseEstimator</span><span class="p">):</span>
+
+     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+     <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+     <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="c1"># transform code</span>
+         <span class="k">return</span> <span class="n">X</span>
+</pre></div>
+
+
+<ul>
+<li><code>TransformerMixin</code> gives us the access to the extremely popular and useful <code>.fit_transform</code> method.</li>
+<li><code>BaseEstimator</code> will be very beneficial when we use <code>GridSearch</code> function in the future as it helps us the the access to <code>.get_params</code></li>
+<li><code>__init__</code> is there so that we can intialize the transformer by just typing <code>MyTransformer()</code></li>
+<li><code>fit</code> will return self. We can see that even though we are not going to transform y, we still need to include it as a parameter and set it to None. This is because in case we want to include a model in a pipeline, a fit in those model will require a <code>y</code></li>
+<li><code>transform</code>: this is where all the magic happens, and our transformed X will be produced from here.</li>
+</ul>
+<p>We are going to create our own transformers to choose the columns that we want</p>
+<div class="highlight"><pre><span></span><span class="c1"># The code based on https://ramhiser.com/post/2018-04-16-building-scikit-learn-pipeline-with-pandas-dataframe/</span>
+
+<span class="k">class</span> <span class="nc">ColumnSelector</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">TransformerMixin</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">columns</span>
+
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">X</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="n">cols_error</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s2">&quot;The DataFrame does not include the columns: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">cols_error</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">cs</span> <span class="o">=</span> <span class="n">ColumnSelector</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">,</span><span class="s2">&quot;height&quot;</span><span class="p">,</span><span class="s2">&quot;weight&quot;</span><span class="p">,</span><span class="s2">&quot;empty_col&quot;</span><span class="p">])</span>
+<span class="n">cs</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>age</th>
+      <th>height</th>
+      <th>weight</th>
+      <th>empty_col</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>58</td>
+      <td>167</td>
+      <td>213.127056</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>55</td>
+      <td>151</td>
+      <td>161.579091</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>40</td>
+      <td>164</td>
+      <td>227.105995</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>54</td>
+      <td>155</td>
+      <td>223.072513</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>33</td>
+      <td>158</td>
+      <td>248.173858</td>
+      <td>None</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>Let's create another transformer which removes the columns with &gt; 50% missing</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">NotManyNaColumns</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">TransformerMixin</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threshold</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span> <span class="o">=</span> <span class="n">threshold</span>
+
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span>
+        <span class="n">na_col</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">too_many_na_col</span> <span class="o">=</span> <span class="n">na_col</span><span class="p">[</span><span class="n">na_col</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span> <span class="o">*</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">index</span>
+        <span class="k">return</span> <span class="n">X</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">too_many_na_col</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">na_col</span> <span class="o">=</span> <span class="n">NotManyNaColumns</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">na_col</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>gender</th>
+      <th>age</th>
+      <th>height</th>
+      <th>weight</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>male</td>
+      <td>58</td>
+      <td>167</td>
+      <td>213.127056</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>male</td>
+      <td>55</td>
+      <td>151</td>
+      <td>161.579091</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>female</td>
+      <td>40</td>
+      <td>164</td>
+      <td>227.105995</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>female</td>
+      <td>54</td>
+      <td>155</td>
+      <td>223.072513</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>female</td>
+      <td>33</td>
+      <td>158</td>
+      <td>248.173858</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>As we can see, <code>empty_col</code> column has been removed since it has more than 50% missing values. However, if we use this function, we can't perform a similar transformation on the training data to a test data. Let's take a look at an example.</p>
+<div class="highlight"><pre><span></span><span class="n">data2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;gender&quot;</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">gender</span><span class="p">,</span><span class="mi">20</span><span class="p">),</span>
+                      <span class="s2">&quot;age&quot;</span> <span class="p">:</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">60</span><span class="p">),</span><span class="mi">20</span><span class="p">),</span>
+                      <span class="s2">&quot;height&quot;</span> <span class="p">:</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span><span class="mi">170</span><span class="p">),</span><span class="mi">20</span><span class="p">),</span>
+                      <span class="s2">&quot;weight&quot;</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span><span class="mi">250</span><span class="p">,</span><span class="mi">20</span><span class="p">),</span>
+                      <span class="s2">&quot;empty_col&quot;</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">20</span><span class="p">),</span>
+                      <span class="s2">&quot;food&quot;</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">food</span><span class="p">,</span><span class="mi">20</span><span class="p">)})</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">X_test</span> <span class="o">=</span> <span class="n">data2</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;food&quot;</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">data2</span><span class="p">[</span><span class="s2">&quot;food&quot;</span><span class="p">]</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">X_test</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="k">class</span> <span class="s1">&#39;pandas.core.frame.DataFrame&#39;</span><span class="o">&gt;</span>
+<span class="n">RangeIndex</span><span class="p">:</span> <span class="mi">20</span> <span class="n">entries</span><span class="p">,</span> <span class="mi">0</span> <span class="k">to</span> <span class="mi">19</span>
+<span class="k">Data</span> <span class="n">columns</span> <span class="p">(</span><span class="n">total</span> <span class="mi">5</span> <span class="n">columns</span><span class="p">):</span>
+<span class="n">gender</span>       <span class="mi">20</span> <span class="n">non</span><span class="o">-</span><span class="k">null</span> <span class="k">object</span>
+<span class="n">age</span>          <span class="mi">20</span> <span class="n">non</span><span class="o">-</span><span class="k">null</span> <span class="n">int64</span>
+<span class="n">height</span>       <span class="mi">20</span> <span class="n">non</span><span class="o">-</span><span class="k">null</span> <span class="n">int64</span>
+<span class="n">weight</span>       <span class="mi">20</span> <span class="n">non</span><span class="o">-</span><span class="k">null</span> <span class="n">float64</span>
+<span class="n">empty_col</span>    <span class="mi">20</span> <span class="n">non</span><span class="o">-</span><span class="k">null</span> <span class="n">int32</span>
+<span class="n">dtypes</span><span class="p">:</span> <span class="n">float64</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">int32</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">int64</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="k">object</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">memory</span> <span class="k">usage</span><span class="p">:</span> <span class="mi">800</span><span class="p">.</span><span class="mi">0</span><span class="o">+</span> <span class="n">bytes</span>
+</pre></div>
+
+
+<p>This dataset surely has no column having more than 50% missing value. However, we need to make our training and testing dataset to have the same column. If we use the <code>NotManyNaColumns</code> as shown above, we will not get it.</p>
+<div class="highlight"><pre><span></span><span class="n">na_col</span> <span class="o">=</span> <span class="n">NotManyNaColumns</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">na_col</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>gender</th>
+      <th>age</th>
+      <th>height</th>
+      <th>weight</th>
+      <th>empty_col</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>female</td>
+      <td>25</td>
+      <td>166</td>
+      <td>236.519943</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>female</td>
+      <td>45</td>
+      <td>150</td>
+      <td>173.783799</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>male</td>
+      <td>35</td>
+      <td>167</td>
+      <td>198.093367</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>male</td>
+      <td>47</td>
+      <td>163</td>
+      <td>240.642942</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>female</td>
+      <td>42</td>
+      <td>151</td>
+      <td>173.177008</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>Let's write a new code to get what we want</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">NotManyNaColumns</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">TransformerMixin</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threshold</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span> <span class="o">=</span> <span class="n">threshold</span>
+
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="n">na_col</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">too_many_na_col</span> <span class="o">=</span> <span class="n">na_col</span><span class="p">[</span><span class="n">na_col</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span> <span class="o">*</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">index</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">too_many_na_col</span> <span class="o">=</span> <span class="n">too_many_na_col</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">X</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">too_many_na_col</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+
+<p>What we did in here is to make sure whatever we did in the training set, will be performed on the testing set. We are going to fit and transform on the training dataset, but only transform on the testing set.</p>
+<div class="highlight"><pre><span></span><span class="n">na_col</span> <span class="o">=</span> <span class="n">NotManyNaColumns</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">na_col</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>gender</th>
+      <th>age</th>
+      <th>height</th>
+      <th>weight</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>male</td>
+      <td>58</td>
+      <td>167</td>
+      <td>213.127056</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>male</td>
+      <td>55</td>
+      <td>151</td>
+      <td>161.579091</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>female</td>
+      <td>40</td>
+      <td>164</td>
+      <td>227.105995</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>female</td>
+      <td>54</td>
+      <td>155</td>
+      <td>223.072513</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>female</td>
+      <td>33</td>
+      <td>158</td>
+      <td>248.173858</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="highlight"><pre><span></span><span class="n">na_col</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>gender</th>
+      <th>age</th>
+      <th>height</th>
+      <th>weight</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>female</td>
+      <td>25</td>
+      <td>166</td>
+      <td>236.519943</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>female</td>
+      <td>45</td>
+      <td>150</td>
+      <td>173.783799</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>male</td>
+      <td>35</td>
+      <td>167</td>
+      <td>198.093367</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>male</td>
+      <td>47</td>
+      <td>163</td>
+      <td>240.642942</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>female</td>
+      <td>42</td>
+      <td>151</td>
+      <td>173.177008</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>As we can see, our training data and testing data have the same columns, even though the <code>empty_col</code> column in the testing data does not have more than 50% missing value.</p>
+<h1>Pipeline</h1>
+<p>Finally, we are going to learn about Pipeline !!! Normally, we are going to analyse our data using this way</p>
+<div class="highlight"><pre><span></span><span class="c1"># Select Column</span>
+<span class="n">cs</span> <span class="o">=</span> <span class="n">ColumnSelector</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">,</span><span class="s2">&quot;height&quot;</span><span class="p">,</span><span class="s2">&quot;weight&quot;</span><span class="p">,</span><span class="s2">&quot;empty_col&quot;</span><span class="p">])</span>
+<span class="n">X_train_transformed</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+
+<span class="c1"># Select good columns</span>
+<span class="n">na_col</span> <span class="o">=</span> <span class="n">NotManyNaColumns</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">X_train_transformed</span> <span class="o">=</span> <span class="n">na_col</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train_transformed</span><span class="p">)</span>
+
+<span class="c1"># Standard Scaler</span>
+<span class="n">sc</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">X_train_transformed</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train_transformed</span><span class="p">)</span>
+
+<span class="c1"># Apply Logistic Regression to predict the food</span>
+<span class="n">lg</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">solver</span> <span class="o">=</span> <span class="s2">&quot;lbfgs&quot;</span><span class="p">)</span>
+<span class="n">lg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_transformed</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">lg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train_transformed</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="nb">array</span><span class="p">([</span><span class="s1">&#39;Western&#39;</span><span class="p">,</span> <span class="s1">&#39;Thai&#39;</span><span class="p">,</span> <span class="s1">&#39;Western&#39;</span><span class="p">,</span> <span class="s1">&#39;Thai&#39;</span><span class="p">,</span> <span class="s1">&#39;Viet&#39;</span><span class="p">,</span> <span class="s1">&#39;Thai&#39;</span><span class="p">,</span> <span class="s1">&#39;Viet&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;Chinese&#39;</span><span class="p">,</span> <span class="s1">&#39;Viet&#39;</span><span class="p">,</span> <span class="s1">&#39;Viet&#39;</span><span class="p">,</span> <span class="s1">&#39;Viet&#39;</span><span class="p">,</span> <span class="s1">&#39;Viet&#39;</span><span class="p">,</span> <span class="s1">&#39;Western&#39;</span><span class="p">,</span> <span class="s1">&#39;Viet&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;Chinese&#39;</span><span class="p">,</span> <span class="s1">&#39;Chinese&#39;</span><span class="p">,</span> <span class="s1">&#39;Western&#39;</span><span class="p">,</span> <span class="s1">&#39;Thai&#39;</span><span class="p">,</span> <span class="s1">&#39;Chinese&#39;</span><span class="p">,</span> <span class="s1">&#39;Viet&#39;</span><span class="p">],</span>
+      <span class="n">dtype</span><span class="o">=</span><span class="k">object</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="c1"># Check the score</span>
+<span class="n">lg</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_train_transformed</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="mi">0</span><span class="p">.</span><span class="mi">45</span>
+</pre></div>
+
+
+<p>There are so many steps that we need to do as shown above. We can make things shorter by using <code>make_pipeline</code>.</p>
+<div class="highlight"><pre><span></span><span class="n">pipe</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">ColumnSelector</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">,</span><span class="s2">&quot;height&quot;</span><span class="p">,</span><span class="s2">&quot;weight&quot;</span><span class="p">,</span><span class="s2">&quot;empty_col&quot;</span><span class="p">]),</span>
+                     <span class="n">NotManyNaColumns</span><span class="p">(</span><span class="mf">0.5</span><span class="p">),</span>
+                     <span class="n">StandardScaler</span><span class="p">(),</span>
+                     <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">solver</span> <span class="o">=</span> <span class="s2">&quot;lbfgs&quot;</span><span class="p">))</span>
+</pre></div>
+
+
+<p><strong>Note : Order is important</strong></p>
+<div class="highlight"><pre><span></span><span class="n">pipe</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">Pipeline</span><span class="p">(</span><span class="n">memory</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
+     <span class="n">steps</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;columnselector&#39;</span><span class="p">,</span> <span class="n">ColumnSelector</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;height&#39;</span><span class="p">,</span> <span class="s1">&#39;weight&#39;</span><span class="p">,</span> <span class="s1">&#39;empty_col&#39;</span><span class="p">])),</span> <span class="p">(</span><span class="s1">&#39;notmanynacolumns&#39;</span><span class="p">,</span> <span class="n">NotManyNaColumns</span><span class="p">(</span><span class="n">threshold</span><span class="o">=</span><span class="mi">0</span><span class="p">.</span><span class="mi">5</span><span class="p">)),</span> <span class="p">(</span><span class="s1">&#39;standardscaler&#39;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">(</span><span class="k">copy</span><span class="o">=</span><span class="k">True</span><span class="p">,</span> <span class="n">with_mean</span><span class="o">=</span><span class="k">True</span><span class="p">,</span> <span class="n">with_std</span><span class="o">=</span><span class="k">True</span><span class="p">)),</span> <span class="p">(</span><span class="s1">&#39;logisticregression&#39;</span><span class="p">,</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="k">C</span><span class="o">=</span><span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="n">class_weight</span><span class="o">=</span><span class="k">None</span><span class="p">,</span> <span class="n">dual</span><span class="o">=</span><span class="n">F</span><span class="p">...</span><span class="n">enalty</span><span class="o">=</span><span class="s1">&#39;l2&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="k">None</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="s1">&#39;lbfgs&#39;</span><span class="p">,</span>
+          <span class="n">tol</span><span class="o">=</span><span class="mi">0</span><span class="p">.</span><span class="mi">0001</span><span class="p">,</span> <span class="k">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">warm_start</span><span class="o">=</span><span class="k">False</span><span class="p">))])</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">pipe</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="nb">array</span><span class="p">([</span><span class="s1">&#39;Western&#39;</span><span class="p">,</span> <span class="s1">&#39;Thai&#39;</span><span class="p">,</span> <span class="s1">&#39;Western&#39;</span><span class="p">,</span> <span class="s1">&#39;Thai&#39;</span><span class="p">,</span> <span class="s1">&#39;Viet&#39;</span><span class="p">,</span> <span class="s1">&#39;Thai&#39;</span><span class="p">,</span> <span class="s1">&#39;Viet&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;Chinese&#39;</span><span class="p">,</span> <span class="s1">&#39;Viet&#39;</span><span class="p">,</span> <span class="s1">&#39;Viet&#39;</span><span class="p">,</span> <span class="s1">&#39;Viet&#39;</span><span class="p">,</span> <span class="s1">&#39;Viet&#39;</span><span class="p">,</span> <span class="s1">&#39;Western&#39;</span><span class="p">,</span> <span class="s1">&#39;Viet&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;Chinese&#39;</span><span class="p">,</span> <span class="s1">&#39;Chinese&#39;</span><span class="p">,</span> <span class="s1">&#39;Western&#39;</span><span class="p">,</span> <span class="s1">&#39;Thai&#39;</span><span class="p">,</span> <span class="s1">&#39;Chinese&#39;</span><span class="p">,</span> <span class="s1">&#39;Viet&#39;</span><span class="p">],</span>
+      <span class="n">dtype</span><span class="o">=</span><span class="k">object</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">pipe</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="mi">0</span><span class="p">.</span><span class="mi">45</span>
+</pre></div>
+ </div>
+</div>
+ </div>
+</body>
+</html>
