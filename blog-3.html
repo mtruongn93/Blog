@@ -14,10 +14,7 @@
  <div class="col-md-8">
   <h3>Alternative for confusing RegEx</h3>
   <label>2019-07-15</label>
-  <ul>
-<li>RegEx (aka Regular Expression) is a tool for people to match a certain string in a huge text. This is extremely useful for people doing Text Analytics or Natural Language Processing. </li>
-<li>However, it is extremely confusing and hard to use as it has so many irregular meta-characters. Luckily, another package was created to help with this problem. It is called <strong>VerbalExpression</strong></li>
-</ul>
+  <p>RegEx (aka Regular Expression) is a tool for people to match a certain string in a huge text. This is extremely useful for people doing Text Analytics or Natural Language Processing. However, it is extremely confusing and hard to use as it has so many irregular meta-characters. Luckily, another package was created to help with this problem. It is called <strong>VerbalExpression</strong></p>
 <h2>RegEx</h2>
 <ul>
 <li>Before we talk about VerbalExpression, let's review about the basic Regular Expression first</li>
@@ -33,12 +30,6 @@
 
 <div class="highlight"><pre><span></span><span class="o">^</span> <span class="o">-</span> <span class="nv">Matches</span> <span class="nv">the</span> <span class="nv">start</span> <span class="nv">of</span> <span class="nv">the</span> <span class="nv">line</span>
 $ <span class="o">-</span> <span class="nv">Matches</span> <span class="nv">the</span> <span class="k">end</span> <span class="nv">of</span> <span class="nv">the</span> <span class="nv">line</span>
-</pre></div>
-
-
-<div class="highlight"><pre><span></span><span class="k">g</span> <span class="o">-</span> <span class="k">Global</span> <span class="k">match</span> <span class="p">(</span><span class="n">matches</span> <span class="k">every</span> <span class="n">occurance</span> <span class="k">in</span> <span class="n">the</span> <span class="nb">text</span><span class="p">,</span> <span class="n">rather</span> <span class="k">than</span> <span class="n">just</span> <span class="n">the</span> <span class="k">first</span><span class="p">)</span>
-<span class="n">i</span> <span class="o">-</span> <span class="k">Case</span> <span class="n">insensitivity</span>
-<span class="n">m</span> <span class="o">-</span> <span class="n">Multiline</span> <span class="p">(</span><span class="k">modifies</span> <span class="n">how</span> <span class="o">^</span> <span class="k">and</span> <span class="err">$</span> <span class="k">work</span><span class="p">)</span>
 </pre></div>
 
 
@@ -186,6 +177,67 @@ $ <span class="o">-</span> <span class="nv">Matches</span> <span class="nv">the<
 <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">google</span><span class="p">.</span><span class="n">com</span> <span class="k">is</span> <span class="n">a</span> <span class="k">Valid</span> <span class="n">URL</span>
 <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">doodles</span><span class="o">/</span> <span class="k">is</span> <span class="n">a</span> <span class="k">Valid</span> <span class="n">URL</span>
 <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">com</span> <span class="o">/</span><span class="n">doodles</span><span class="o">/</span> <span class="k">is</span> <span class="k">not</span> <span class="n">a</span> <span class="k">Valid</span> <span class="n">URL</span>
+</pre></div>
+
+
+<ul>
+<li>To be honest, VerbalExpression is not completely well-built on Python. There are still some components missing. Remember that we have things like this in RegEx ?</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="o">*</span> <span class="o">-</span> <span class="n">Zero</span> <span class="k">or</span> <span class="k">more</span>
+<span class="o">+</span> <span class="o">-</span> <span class="n">One</span> <span class="k">or</span> <span class="k">more</span>
+<span class="o">?</span> <span class="o">-</span> <span class="n">Zero</span> <span class="k">or</span> <span class="n">one</span>
+<span class="err">{</span><span class="n">n</span><span class="err">}</span> <span class="o">-</span> <span class="n">Exactly</span> <span class="s1">&#39;n&#39;</span> <span class="nb">number</span>
+<span class="err">{</span><span class="n">n</span><span class="p">,</span><span class="err">}</span> <span class="o">-</span> <span class="n">Matches</span> <span class="s1">&#39;n&#39;</span> <span class="k">or</span> <span class="k">more</span> <span class="n">occurrences</span>
+<span class="err">{</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="err">}</span> <span class="o">-</span> <span class="k">Between</span> <span class="s1">&#39;n&#39;</span> <span class="k">and</span> <span class="s1">&#39;m&#39;</span>
+</pre></div>
+
+
+<ul>
+<li>For now VerbalExpression does not have any function to support this syntax. Hence, in order for us to use this, we need to manually add in.</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="n">verbal_expression</span><span class="p">.</span><span class="k">add</span><span class="p">(</span><span class="err">{</span><span class="mi">0</span><span class="p">,</span><span class="err">}</span><span class="p">)</span>  <span class="c1">--&gt; * - Zero or more</span>
+<span class="n">verbal_expression</span><span class="p">.</span><span class="k">add</span><span class="p">(</span><span class="err">{</span><span class="mi">1</span><span class="p">,</span><span class="err">}</span><span class="p">)</span>  <span class="c1">--&gt; + - One or more</span>
+<span class="n">verbal_expression</span><span class="p">.</span><span class="k">add</span><span class="p">(</span><span class="err">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="err">}</span><span class="p">)</span> <span class="c1">--&gt; ? - Zero or one</span>
+<span class="n">verbal_expression</span><span class="p">.</span><span class="k">add</span><span class="p">(</span><span class="err">{</span><span class="n">n</span><span class="err">}</span><span class="p">)</span>   <span class="c1">--&gt; {n} - Exactly &#39;n&#39; number</span>
+<span class="n">verbal_expression</span><span class="p">.</span><span class="k">add</span><span class="p">(</span><span class="err">{</span><span class="n">n</span><span class="p">,</span><span class="err">}</span><span class="p">)</span>  <span class="c1">--&gt; {n,} - Matches &#39;n&#39; or more occurrences</span>
+<span class="n">verbal_expression</span><span class="p">.</span><span class="k">add</span><span class="p">(</span><span class="err">{</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="err">}</span><span class="p">)</span> <span class="c1">--&gt; {n,m} - Between &#39;n&#39; and &#39;m&#39;</span>
+</pre></div>
+
+
+<ul>
+<li>Let's find words consist of more than 2 "very" words</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="n">verbal_expression</span> <span class="o">=</span> <span class="n">VerEx</span><span class="p">()</span>
+<span class="n">tester</span> <span class="o">=</span> <span class="p">(</span><span class="n">verbal_expression</span><span class="o">.</span>
+            <span class="n">find</span><span class="p">(</span><span class="s2">&quot;very&quot;</span><span class="p">)</span><span class="o">.</span>
+            <span class="n">add</span><span class="p">(</span><span class="s2">&quot;{2,}&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">tester</span><span class="o">.</span><span class="n">source</span><span class="p">())</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="n">very</span><span class="p">)</span><span class="err">{</span><span class="mi">2</span><span class="p">,</span><span class="err">}</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">test_very</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="s2">&quot;very&quot;</span><span class="p">,</span><span class="s2">&quot;veryvery&quot;</span><span class="p">,</span><span class="s2">&quot;veryveryvery&quot;</span><span class="p">]</span>
+
+<span class="c1"># Test if the word is correct</span>
+<span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">test_very</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">tester</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+        <span class="k">print</span> <span class="p">(</span><span class="n">f</span><span class="s2">&quot;{text} is a correct word&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span> <span class="p">(</span><span class="n">f</span><span class="s2">&quot;{text} is not a correct word&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span> <span class="k">is</span> <span class="k">not</span> <span class="n">a</span> <span class="n">correct</span> <span class="n">word</span>
+<span class="n">very</span> <span class="k">is</span> <span class="k">not</span> <span class="n">a</span> <span class="n">correct</span> <span class="n">word</span>
+<span class="n">veryvery</span> <span class="k">is</span> <span class="n">a</span> <span class="n">correct</span> <span class="n">word</span>
+<span class="n">veryveryvery</span> <span class="k">is</span> <span class="n">a</span> <span class="n">correct</span> <span class="n">word</span>
 </pre></div>
  </div>
 </div>
