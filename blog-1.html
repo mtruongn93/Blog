@@ -1,86 +1,45 @@
-<!doctype html>
-<html lang="en" itemscope itemtype="http://schema.org/Person">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <!-- Site Meta Data -->
-  <title>List Comprehension</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="">
-  <meta name="author" content="Minh">
+        <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Minh Truong | List Comprehension</title>
+    <link rel="shortcut icon" type="image/png" href="https://mtruongn93.github.io/blog/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="https://mtruongn93.github.io/blog/favicon.ico">
+    <link href="https://mtruongn93.github.io/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Minh Truong Full Atom Feed" />
+    <link href="https://mtruongn93.github.io/blog/feeds/misc.atom.xml" type="application/atom+xml" rel="alternate" title="Minh Truong Categories Atom Feed" />
+    <link rel="stylesheet" href="https://mtruongn93.github.io/blog/theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="https://mtruongn93.github.io/blog/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="https://mtruongn93.github.io/blog/theme/css/print.css" type="text/css" media="print" />
+    <meta name="generator" content="Pelican" />
+    <meta name="description" content="" />
+    <meta name="author" content="Minh" />
 
-  <link rel="shortcut icon" href="">
-
-  <!-- schema.org -->
-  <meta itemprop="name" content="Minh Truong">
-  <meta itemprop="image" content="">
-  <meta itemprop="description" content="">
-
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
-  <!-- Style Meta Data -->
-  <link rel="stylesheet" href="https://mtruongn93.github.io/blog/theme/css/style.css" type="text/css" />
-  <link rel="stylesheet" href="https://mtruongn93.github.io/blog/theme/css/pygments.css" type="text/css" />
-
-  <!-- Feed Meta Data -->
-    <link href="https://mtruongn93.github.io/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Minh Truong ATOM Feed" />
-
-  <!-- Twitter Feed -->
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:site" content="">
-  <meta name="twitter:image" content="">
-
-<meta name="twitter:creator" content="">
-<meta name="twitter:url" content="https://mtruongn93.github.io/blog/blog-1.html">
-<meta name="twitter:title" content="Minh Truong ~ List Comprehension">
-<meta name="twitter:description" content="<p>If you are a new Python user, or a loop addicted user, it's time for you to consider to change to something new, something that makes your code run faster, and look much better.</p>
-<p>Introducing <strong>List Comprehension</strong></p>
-<h2>What is List Comprehension ?</h2>
-<p>List comprehension is just a succint and elegant way …</p>">
-
-<!-- Facebook Meta Data -->
-<meta property="og:title" content="Minh Truong ~ List Comprehension" />
-<meta property="og:description" content="<p>If you are a new Python user, or a loop addicted user, it's time for you to consider to change to something new, something that makes your code run faster, and look much better.</p>
-<p>Introducing <strong>List Comprehension</strong></p>
-<h2>What is List Comprehension ?</h2>
-<p>List comprehension is just a succint and elegant way …</p>" />
-<meta property="og:image" content="" />
+    <meta name="keywords" content="python" />
 </head>
-
 <body>
-  <!-- Sidebar -->
-  <aside>
-    <!--<center><a href="https://mtruongn93.github.io/blog"><img id="avatar" src=""></a></center>-->
-    <h1>Minh Truong</h1>
-    <br>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="https://mtruongn93.github.io/blog/">Home</a></li>
+            </ul>
+        </nav>
+        <div class="header_box">
+            <h1><a href="https://mtruongn93.github.io/blog/">Minh Truong</a></h1>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">Jun 16, 2019</h4>
 
+            <article class="post">
+                <h2 class="title">
+                    <a href="https://mtruongn93.github.io/blog/blog-1.html" rel="bookmark" title="Permanent Link to &quot;List Comprehension&quot;">List Comprehension</a>
+                </h2>
 
-    <nav class="nav">
-      <ul class="list-bare">
-      
-         
-         
-      </ul>
-    </nav>
+                
+                
 
-    <p class="social">
-      <a href="https://mtruongn93.github.io/blog/feeds/all.atom.xml" rel="alternate">
-        <img src="https://mtruongn93.github.io/blog/theme/images/icons/rss.png"></a>
-    </p>
-
-    <!--
-    <h2>Categories</h2>
-    <ul class="navbar">
-      <li class="active"><a href="https://mtruongn93.github.io/blog/category/misc.html">misc</a></li>
-    </ul> 
-    -->
-  </aside>
-
-  <!-- Content -->
-  <article>
-<section id="content">
-    <article>
-        <h2 class="post_title post_detail"><a href="https://mtruongn93.github.io/blog/blog-1.html" rel="bookmark" title="Permalink to List Comprehension">List Comprehension</a></h2>
-        <div class="entry-content blog-post">
-            <p>If you are a new Python user, or a loop addicted user, it's time for you to consider to change to something new, something that makes your code run faster, and look much better.</p>
+                <p>If you are a new Python user, or a loop addicted user, it's time for you to consider to change to something new, something that makes your code run faster, and look much better.</p>
 <p>Introducing <strong>List Comprehension</strong></p>
 <h2>What is List Comprehension ?</h2>
 <p>List comprehension is just a succint and elegant way for people to create a new list where every element in the list is created based on a certain rule</p>
@@ -368,42 +327,25 @@
 
 <div class="highlight"><pre><span></span><span class="err">{</span><span class="s1">&#39;Toronto&#39;</span><span class="p">:</span> <span class="mi">850000</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;Waterloo&#39;</span><span class="p">:</span> <span class="mi">550000</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;Vancouver&#39;</span><span class="p">:</span> <span class="mi">800000</span><span class="p">.</span><span class="mi">0</span><span class="err">}</span>
 </pre></div>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="https://mtruongn93.github.io/blog/blog-1.html">posted at 10:20</a>
+                    &nbsp;&middot;
+                    &nbsp;<a href="https://mtruongn93.github.io/blog/tag/python.html" class="tags">python</a>
+                </div>
+            </article>
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+                &middot;
+                <a href="https://mtruongn93.github.io/blog/feeds/all.atom.xml" rel="alternate">Atom Feed</a>
+            </footer>
         </div>
-        <div class="post_list">
-            <span>By </span>
-            <a href="https://mtruongn93.github.io/blog/author/minh.html">@Minh</a>
-            <span> in </span>
-            <span class="post_category"><a href="https://mtruongn93.github.io/blog/category/misc.html" rel="bookmark" title="Permalink to misc">[ misc ]</a></span>
-            <span class="post_date">Sun 16 June 2019</span>
-            <div><span>Tags : </span>
-                <span><a href="https://mtruongn93.github.io/blog/tag/python.html">#python, </a></span>
-            </div>
-
-            <div class="entry-social">
-                <span class="twitter"><a target="_blank" rel="nofollow" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=700');return false;" title="Twitter" href="https://twitter.com/share?url=https://mtruongn93.github.io/blog/blog-1.html&text=List Comprehension&via="><img src="https://mtruongn93.github.io/blog/theme/images/icons/twitter-s.png"></a></span>
-
-                <span class="gplus"><a target="_blank" title="Google +" href="https://plus.google.com/share?url=https://mtruongn93.github.io/blog/blog-1.html&hl=fr" rel="nofollow" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=650');return false;"><img src="https://mtruongn93.github.io/blog/theme/images/icons/google-s.png"></a></span>
-
-                <span class="facebook"><a target="_blank" title="Facebook" rel="nofollow" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;" href="https://www.facebook.com/sharer.php?u=https://mtruongn93.github.io/blog/blog-1.html&t=List Comprehension"><img src="https://mtruongn93.github.io/blog/theme/images/icons/facebook-s.png"></a></span>
-
-                <a  target="_blank" title="Linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=https://mtruongn93.github.io/blog/blog-1.html&title=List Comprehension" rel="nofollow" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=650');return false;"><img src="https://mtruongn93.github.io/blog/theme/images/icons/linkedin-s.png"></a>
-
-                <span class="mail"><a href="mailto:?subject=List Comprehension&amp;body=Viens découvrir un article à propos de [List Comprehension] sur le site de Minh. https://mtruongn93.github.io/blog/blog-1.html" title="Share by Email" target="_blank"><img src="https://mtruongn93.github.io/blog/theme/images/icons/mail-s.png"></a></span>
-            </div>
-        </div>
-    </article>
-</section>
-  </article>
-
-  <!-- Footer -->
-  <footer>
-    <p>
-      Blog powered by <a href="http://getpelican.com/">Pelican</a>, 
-      which takes great advantage of <a href="http://python.org">Python</a>.
-      Theme <a href="https://github.com/parbhat/pelican-blue">Pelican-Blue</a> by <a href="https://parbhatpuri.com/">@parbhat</a>.
-    </p>
-  </footer>
-
-
+        <div class="clear"></div>
+    </div>
 </body>
 </html>
