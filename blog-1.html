@@ -280,7 +280,8 @@
                <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span>
                <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]]</span>
 
-<span class="p">[</span><span class="n">number</span><span class="o">*</span><span class="mi">2</span> <span class="k">if</span> <span class="n">number</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">number</span><span class="o">*</span><span class="mi">3</span> <span class="k">for</span> <span class="n">list_</span> <span class="ow">in</span> <span class="n">number_list</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">list_</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">list_</span><span class="p">]</span>
+<span class="p">[</span><span class="n">number</span><span class="o">*</span><span class="mi">2</span> <span class="k">if</span> <span class="n">number</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">number</span><span class="o">*</span><span class="mi">3</span> <span class="k">for</span> <span class="n">list_</span> <span class="ow">in</span> <span class="n">number_list</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">list_</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span> 
+ <span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">list_</span><span class="p">]</span>
 </pre></div>
 
 
@@ -321,7 +322,8 @@
 <p>Knowing how to write a list comprehension is smiliar to "buy 1 get 1" as you will be able to write a dictionary comprehension.</p>
 <p>Similar to list comprehension, dictionary comprehension is a concise, and fast way to produce a new dictionary where every key and value are based on a certain rule.</p>
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
-<span class="n">city_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;city&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Toronto&quot;</span><span class="p">,</span><span class="s2">&quot;Waterloo&quot;</span><span class="p">,</span> <span class="s2">&quot;Toronto&quot;</span><span class="p">,</span> <span class="s2">&quot;Vancouver&quot;</span><span class="p">,</span> <span class="s2">&quot;Waterloo&quot;</span><span class="p">],</span>
+<span class="n">city_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;city&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Toronto&quot;</span><span class="p">,</span><span class="s2">&quot;Waterloo&quot;</span><span class="p">,</span> <span class="s2">&quot;Toronto&quot;</span><span class="p">,</span> 
+                                  <span class="s2">&quot;Vancouver&quot;</span><span class="p">,</span> <span class="s2">&quot;Waterloo&quot;</span><span class="p">],</span>
                         <span class="s2">&quot;house_price&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="mi">1000000</span><span class="p">,</span><span class="mi">500000</span><span class="p">,</span><span class="mi">700000</span><span class="p">,</span><span class="mi">800000</span><span class="p">,</span><span class="mi">600000</span><span class="p">]})</span>
 <span class="n">city_df</span>
 </pre></div>
@@ -418,13 +420,14 @@
   </article>
 
   <!-- Footer -->
-  <!-- <footer>
+  <footer>
     <p>
-      Blog powered by <a href="http://getpelican.com/">Pelican</a>,
+      <!-- Blog powered by <a href="http://getpelican.com/">Pelican</a>,
       which takes great advantage of <a href="http://python.org">Python</a>.
-      Theme <a href="https://github.com/parbhat/pelican-blue">Pelican-Blue</a> by <a href="https://parbhatpuri.com/">@parbhat</a>.
+      Theme <a href="https://github.com/parbhat/pelican-blue">Pelican-Blue</a> by <a href="https://parbhatpuri.com/">@parbhat</a>. -->
+      Always look on the bright side of life !!!!
     </p>
-  </footer> -->
+  </footer>
 
 
 </body>
