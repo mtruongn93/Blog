@@ -133,21 +133,21 @@
 </pre></div>
 
 
-<div class="highlight"><pre><span></span>[2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0]
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">.</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 
 
 <h2>Why is List Comprehension better than traditonal Loop ?</h2>
-<p><code>Good programmers write code that humans can understand. 
-                                           Martin Fowler</code></p>
+<p><strong><strong>Good programmers write code that humans can understand. 
+                                           Martin Fowler</strong></strong></p>
 <p>List comprehension clearly makes our code much more readable and shorter than traditional loop. As we can see from the code above, it reduces 3 lines of code into 1. Anyone with a basic understanding of list comprehension can easily understand it.</p>
 <p>In addition, list comprehension is also faster than traditional loop. One of the reason is that it doesn't need to load the append attribute of the list and call it as a function at each iteration</p>
 <h2>How do we write a list comprehension ?</h2>
 <p>I used to know a lot of people having hard time with using list comprehension as they are too comfortable with using traditonal loop; and hence, less willing to change.</p>
 <p>To be honest, creating a list comprehension is even easier than making a traditional loop as you do not even need to use .append.</p>
-<p>Normally, the format of a list comprehension will be : <code>[expression for item in list]</code></p>
-<p><code>Expression</code> is just the method that you want to transform each element of your list</p>
-<p><code>item</code> is each element in your list</p>
+<p>Normally, the format of a list comprehension will be : <strong>[expression for item in list]</strong></p>
+<p><strong>Expression</strong> is just the method that you want to transform each element of your list</p>
+<p><strong>item</strong> is each element in your list</p>
 <h2>Type of List Comprehension</h2>
 <h3>1. Unconditional List Comprehension</h3>
 <p>We have a list of name, and we want to captitalize all the letters of every name in the list</p>

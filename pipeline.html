@@ -102,8 +102,8 @@
         <div class="entry-content blog-post">
             <p>In data science, one of the most tedious step that we need to perform is feature engineering and modeling. These steps are very repetitive. Luckily, creating a <strong>pipeline</strong> can help us solve this problem.</p>
 <h1>What is a pipeline ?</h1>
-<p>In a simple term, pipeline is a tool in sklearn package for us to compose multiple estimators. For example, when we want to analyse a dataset, we may need to choose the features (columns) that we want, standardize them and apply the model. All of these steps can be escapulated in a <code>Pipeline</code> </p>
-<p>Assuming we have a dataset like the one below, and we want to predict which food a person wants to eat based on their gender, age, height, weight and an unknown feature "empty_col".</p>
+<p>In a simple term, pipeline is a tool in sklearn package for us to compose multiple estimators. For example, when we want to analyse a dataset, we may need to choose the features (columns) that we want, standardize them and apply the model. All of these steps can be escapulated in a <strong>Pipeline</strong> </p>
+<p>Assuming we have a dataset like the one below, and we want to predict which food a person wants to eat based on their <strong>gender, age, height, weight and an unknown feature "empty_col"</strong>.</p>
 <div class="highlight"><pre><span></span><span class="c1"># Importing library</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
@@ -238,7 +238,7 @@
 </pre></div>
 
 
-<p>Let's say, for some reasons, the person analyzing this dataset only wants to use features <code>age, height, weight, and empty_col</code> to predict the food.</p>
+<p>Let's say, for some reasons, the person analyzing this dataset only wants to use features <strong>age, height, weight, and empty_col</strong> to predict the food.</p>
 <div class="highlight"><pre><span></span><span class="n">X_train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;gender&quot;</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
 
@@ -254,7 +254,7 @@
     }
 
     .dataframe thead th {
-        text-align: right;
+        text-align: left;
     }
 </style>
 <table border="1" class="dataframe">
@@ -412,9 +412,10 @@
 </table>
 </div>
 
-<p>The method shown above is one way to do it. However, imagine that we need to do it for so many datasets, it will become extremely tedious. In addition, when our datasets are getting more complicated, doing that way repetitively will make our code become hard to read. We are going to create a class that can automate that process, and can be put in a pipeline</p>
+<p>The method shown above is one way to do it. However, imagine that we need to do it for so many datasets, it will become extremely tedious. </p>
+<p>In addition, when our datasets are getting more complicated, doing that way repetitively will make our code become hard to read. We are going to create a class that can automate that process, and can be put in a pipeline</p>
 <h1>Custom Transformers</h1>
-<p>There are multiple written Transformers in Python such as StandardScaler, and LabelBinarizer. However, during our feature engineering, we usually need to write our own transformers. Here is the general template for a custom transformers:</p>
+<p>There are multiple written Transformers in Python such as <strong>StandardScaler</strong>, and <strong>LabelBinarizer</strong>. However, during our feature engineering, we usually need to write our own transformers. Here is the general template for a custom transformers:</p>
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyTransformer</span><span class="p">(</span><span class="n">TransformerMixin</span><span class="p">,</span> <span class="n">BaseEstimator</span><span class="p">):</span>
 
      <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -430,11 +431,11 @@
 
 
 <ul>
-<li><code>TransformerMixin</code> gives us the access to the extremely popular and useful <code>.fit_transform</code> method.</li>
-<li><code>BaseEstimator</code> will be very beneficial when we use <code>GridSearch</code> function in the future as it helps us the the access to <code>.get_params</code></li>
-<li><code>__init__</code> is there so that we can intialize the transformer by just typing <code>MyTransformer()</code></li>
-<li><code>fit</code> will return self. We can see that even though we are not going to transform y, we still need to include it as a parameter and set it to None. This is because in case we want to include a model in a pipeline, a fit in those model will require a <code>y</code></li>
-<li><code>transform</code>: this is where all the magic happens, and our transformed X will be produced from here.</li>
+<li><strong>TransformerMixin</strong> gives us the access to the extremely popular and useful <strong>.fit_transform</strong> method.</li>
+<li><strong>BaseEstimator</strong> will be very beneficial when we use <strong>GridSearch</strong> function in the future as it helps us the the access to <strong>.get_params</strong></li>
+<li><strong><strong>init</strong></strong> is there so that we can intialize the transformer by just typing <strong>MyTransformer()</strong></li>
+<li><strong>fit</strong> will return self. We can see that even though we are not going to transform y, we still need to include it as a parameter and set it to None. This is because in case we want to include a model in a pipeline, a fit in those model will require a <strong>y</strong></li>
+<li><strong>transform</strong>: this is where all the magic happens, and our transformed X will be produced from here.</li>
 </ul>
 <p>We are going to create our own transformers to choose the columns that we want</p>
 <div class="highlight"><pre><span></span><span class="c1"># The code based on https://ramhiser.com/post/2018-04-16-building-scikit-learn-pipeline-with-pandas-dataframe/</span>
@@ -474,7 +475,7 @@
     }
 
     .dataframe thead th {
-        text-align: right;
+        text-align: left;
     }
 </style>
 <table border="1" class="dataframe">
@@ -559,7 +560,7 @@
     }
 
     .dataframe thead th {
-        text-align: right;
+        text-align: left;
     }
 </style>
 <table border="1" class="dataframe">
@@ -612,7 +613,7 @@
 </table>
 </div>
 
-<p>As we can see, <code>empty_col</code> column has been removed since it has more than 50% missing values. However, if we use this function, we can't perform a similar transformation on the training data to a test data. Let's take a look at an example.</p>
+<p>As we can see, <strong>empty_col</strong> column has been removed since it has more than 50% missing values. However, if we use this function, we can't perform a similar transformation on the training data to a test data. Let's take a look at an example.</p>
 <div class="highlight"><pre><span></span><span class="n">data2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;gender&quot;</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">gender</span><span class="p">,</span><span class="mi">20</span><span class="p">),</span>
                       <span class="s2">&quot;age&quot;</span> <span class="p">:</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">60</span><span class="p">),</span><span class="mi">20</span><span class="p">),</span>
                       <span class="s2">&quot;height&quot;</span> <span class="p">:</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span><span class="mi">170</span><span class="p">),</span><span class="mi">20</span><span class="p">),</span>
@@ -644,7 +645,7 @@
 </pre></div>
 
 
-<p>This dataset surely has no column having more than 50% missing value. However, we need to make our training and testing dataset to have the same column. If we use the <code>NotManyNaColumns</code> as shown above, we will not get it.</p>
+<p>This dataset surely has no column having more than 50% missing value. However, we need to make our training and testing dataset to have the same column. If we use the <strong>NotManyNaColumns</strong> as shown above, we will not get it.</p>
 <div class="highlight"><pre><span></span><span class="n">na_col</span> <span class="o">=</span> <span class="n">NotManyNaColumns</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="n">na_col</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
@@ -661,7 +662,7 @@
     }
 
     .dataframe thead th {
-        text-align: right;
+        text-align: left;
     }
 </style>
 <table border="1" class="dataframe">
@@ -754,7 +755,7 @@
     }
 
     .dataframe thead th {
-        text-align: right;
+        text-align: left;
     }
 </style>
 <table border="1" class="dataframe">
@@ -822,7 +823,7 @@
     }
 
     .dataframe thead th {
-        text-align: right;
+        text-align: left;
     }
 </style>
 <table border="1" class="dataframe">
@@ -875,7 +876,7 @@
 </table>
 </div>
 
-<p>As we can see, our training data and testing data have the same columns, even though the <code>empty_col</code> column in the testing data does not have more than 50% missing value.</p>
+<p>As we can see, our training data and testing data have the same columns, even though the <strong>empty_col</strong> column in the testing data does not have more than 50% missing value.</p>
 <h1>Pipeline</h1>
 <p>Finally, we are going to learn about Pipeline !!! Normally, we are going to analyse our data using this way</p>
 <div class="highlight"><pre><span></span><span class="c1"># Select Column</span>
@@ -913,7 +914,7 @@
 </pre></div>
 
 
-<p>There are so many steps that we need to do as shown above. We can make things shorter by using <code>make_pipeline</code>.</p>
+<p>There are so many steps that we need to do as shown above. We can make things shorter by using <strong>make_pipeline</strong>.</p>
 <div class="highlight"><pre><span></span><span class="n">pipe</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">ColumnSelector</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">,</span><span class="s2">&quot;height&quot;</span><span class="p">,</span><span class="s2">&quot;weight&quot;</span><span class="p">,</span><span class="s2">&quot;empty_col&quot;</span><span class="p">]),</span>
                      <span class="n">NotManyNaColumns</span><span class="p">(</span><span class="mf">0.5</span><span class="p">),</span>
                      <span class="n">StandardScaler</span><span class="p">(),</span>

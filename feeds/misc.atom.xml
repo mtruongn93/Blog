@@ -3,36 +3,32 @@
 &lt;p&gt;However, it is extremely confusing and hard to use as it has so many irregular meta-characters. Luckily, another package …&lt;/p&gt;</summary><content type="html">&lt;p&gt;RegEx (aka Regular Expression) is a tool for people to match a certain string in a huge text. This is extremely useful for people doing Text Analytics or Natural Language Processing. &lt;/p&gt;
 &lt;p&gt;However, it is extremely confusing and hard to use as it has so many irregular meta-characters. Luckily, another package was created to help with this problem. It is called &lt;strong&gt;VerbalExpression&lt;/strong&gt;&lt;/p&gt;
 &lt;h2&gt;RegEx&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Before we talk about VerbalExpression, let's review about the basic Regular Expression first&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;az&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;match&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;either&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ow"&gt;or&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;a-z&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;match&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ow"&gt;any&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;characters&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;A-Z&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;match&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ow"&gt;any&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;characters&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Z&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;a-zA-Z&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;match&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ow"&gt;any&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;characters&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ow"&gt;or&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Z&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;1-4&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;match&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ow"&gt;any&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;numbers&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;^a-z&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;match&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ow"&gt;any&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;characters&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;p&gt;Before we talk about VerbalExpression, let's review about the basic Regular Expression first&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;[az] - match either a or z
+[a-z] - match any characters from a to z
+[A-Z] - match any characters from A to Z
+[a-zA-Z] - match any characters from a to z or A to Z
+[1-4] - match any numbers from 1 to 4
+[&lt;span class="nb"&gt;^&lt;/span&gt;a-z] - match any characters from a to z
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;^&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;Matches&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;start&lt;/span&gt; &lt;span class="nv"&gt;of&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;line&lt;/span&gt;
-$ &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;Matches&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="k"&gt;end&lt;/span&gt; &lt;span class="nv"&gt;of&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;line&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;^&lt;/span&gt; - Matches the start of the line
+&lt;span class="s"&gt;$&lt;/span&gt;&lt;span class="nb"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt; Matches the end of the line&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;Zero&lt;/span&gt; &lt;span class="k"&gt;or&lt;/span&gt; &lt;span class="k"&gt;more&lt;/span&gt;
-&lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;One&lt;/span&gt; &lt;span class="k"&gt;or&lt;/span&gt; &lt;span class="k"&gt;more&lt;/span&gt;
-&lt;span class="o"&gt;?&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;Zero&lt;/span&gt; &lt;span class="k"&gt;or&lt;/span&gt; &lt;span class="n"&gt;one&lt;/span&gt;
-&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;Exactly&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;n&amp;#39;&lt;/span&gt; &lt;span class="nb"&gt;number&lt;/span&gt;
-&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;Matches&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;n&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;or&lt;/span&gt; &lt;span class="k"&gt;more&lt;/span&gt; &lt;span class="n"&gt;occurrences&lt;/span&gt;
-&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="k"&gt;Between&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;n&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;and&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;m&amp;#39;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;* - Zero or more
++ - One or more
+? - Zero or one
+&lt;span class="nb"&gt;{&lt;/span&gt;n&lt;span class="nb"&gt;}&lt;/span&gt; - Exactly &amp;#39;n&amp;#39; number
+&lt;span class="nb"&gt;{&lt;/span&gt;n,&lt;span class="nb"&gt;}&lt;/span&gt; - Matches &amp;#39;n&amp;#39; or more occurrences
+&lt;span class="nb"&gt;{&lt;/span&gt;n,m&lt;span class="nb"&gt;}&lt;/span&gt; - Between &amp;#39;n&amp;#39; and &amp;#39;m&amp;#39;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;ul&gt;
-&lt;li&gt;As we can see, there are so many things for us to remember to use Regular Expression. For me, most of the time, I need to Google or to use StackOverflow to check for any Regex questions.&lt;/li&gt;
-&lt;li&gt;Luckily, we can use VerbalExpressions package to help us with this process.&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;As we can see, there are so many things for us to remember to use Regular Expression. For me, most of the time, I need to Google or to use StackOverflow to check for any Regex questions.&lt;/p&gt;
+&lt;p&gt;Luckily, we can use VerbalExpressions package to help us with this process.&lt;/p&gt;
 &lt;h2&gt;VerbalExpressions&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;re&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -42,13 +38,11 @@ $ &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;Matches&lt;/span&g
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;ul&gt;
-&lt;li&gt;Let's start with the range in RegEx. We can easily replace this with &lt;code&gt;.range()&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;verbal_expression&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;az&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="c1"&gt;--&amp;gt; [az]&lt;/span&gt;
-&lt;span class="n"&gt;verbal_expression&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;a&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;z&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;         &lt;/span&gt;&lt;span class="c1"&gt;--&amp;gt; [a-z]&lt;/span&gt;
-&lt;span class="n"&gt;verbal_expression&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;A&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;Z&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;         &lt;/span&gt;&lt;span class="c1"&gt;--&amp;gt; [A-Z]&lt;/span&gt;
-&lt;span class="n"&gt;verbal_expression&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;a&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;z&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;A&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;Z&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;--&amp;gt; [a-zA-Z]&lt;/span&gt;
+&lt;p&gt;Let's start with the range in RegEx. We can easily replace this with &lt;code&gt;.range()&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;verbal&lt;span class="nb"&gt;_&lt;/span&gt;expression.range(&amp;quot;az&amp;quot;)            --&amp;gt; [az]
+verbal&lt;span class="nb"&gt;_&lt;/span&gt;expression.range(&amp;quot;a&amp;quot;,&amp;quot;z&amp;quot;)         --&amp;gt; [a-z]
+verbal&lt;span class="nb"&gt;_&lt;/span&gt;expression.range(&amp;quot;A&amp;quot;,&amp;quot;Z&amp;quot;)         --&amp;gt; [A-Z]
+verbal&lt;span class="nb"&gt;_&lt;/span&gt;expression.range(&amp;quot;a&amp;quot;,&amp;quot;z&amp;quot;,&amp;quot;A&amp;quot;,&amp;quot;Z&amp;quot;) --&amp;gt; [a-zA-Z]
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -64,7 +58,6 @@ $ &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;Matches&lt;/span&g
 
 
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;c&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
-
 &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;b&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;c&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;b&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -77,7 +70,6 @@ $ &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;Matches&lt;/span&g
 
 
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;C&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
-
 &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;A&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;B&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -90,36 +82,29 @@ $ &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;Matches&lt;/span&g
 
 
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;cA&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;C1&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
-
 &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;b&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;c&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;A&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;B&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;2&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;b&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;ul&gt;
-&lt;li&gt;We can also define matches start of or end of the line with VerbalExpression&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;verbal_expression&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;start_of_line&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="c1"&gt;--&amp;gt; ^&lt;/span&gt;
-&lt;span class="n"&gt;verbal_expression&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;end_of_line&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;   &lt;span class="c1"&gt;--&amp;gt; $&lt;/span&gt;
+&lt;p&gt;We can also define matches start of or end of the line with VerbalExpression&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;verbal&lt;span class="nb"&gt;_&lt;/span&gt;expression.start&lt;span class="nb"&gt;_&lt;/span&gt;of&lt;span class="nb"&gt;_&lt;/span&gt;line() --&amp;gt; &lt;span class="nb"&gt;^&lt;/span&gt;
+verbal&lt;span class="nb"&gt;_&lt;/span&gt;expression.end&lt;span class="nb"&gt;_&lt;/span&gt;of&lt;span class="nb"&gt;_&lt;/span&gt;line()   --&amp;gt; &lt;span class="s"&gt;$&lt;/span&gt;&lt;span class="nb"&gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;ul&gt;
-&lt;li&gt;In addition, we also can state which words that we want to have, which words we may want to have. We can also exclude the words that we don't want.&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;In addition, we also can state which words that we want to have, which words we may want to have. We can also exclude the words that we don't want.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;verbal_expression&lt;/span&gt;.&lt;span class="nv"&gt;find&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;          &lt;span class="o"&gt;--&amp;gt;&lt;/span&gt; &lt;span class="nv"&gt;find&lt;/span&gt; &lt;span class="nv"&gt;a&lt;/span&gt; &lt;span class="nv"&gt;string&lt;/span&gt;
 &lt;span class="nv"&gt;verbal_expression&lt;/span&gt;.&lt;span class="nv"&gt;maybe&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;         &lt;span class="o"&gt;--&amp;gt;&lt;/span&gt; &lt;span class="nv"&gt;maybe&lt;/span&gt; &lt;span class="nv"&gt;find&lt;/span&gt; &lt;span class="nv"&gt;a&lt;/span&gt; &lt;span class="nv"&gt;string&lt;/span&gt;
 &lt;span class="nv"&gt;verbal_expression&lt;/span&gt;.&lt;span class="nv"&gt;anything_but&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;  &lt;span class="o"&gt;--&amp;gt;&lt;/span&gt; &lt;span class="nv"&gt;exclude&lt;/span&gt; &lt;span class="nv"&gt;strings&lt;/span&gt; &lt;span class="nv"&gt;we&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="nv"&gt;not&lt;/span&gt; &lt;span class="nv"&gt;want&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;ul&gt;
-&lt;li&gt;Let's try to look for a correct url link.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;  &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;google&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;
-  &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;google&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;
-  &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;google&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;
-  &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;google&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;
-  &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;google&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;doodles&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+&lt;p&gt;Let's try to look for a correct url link.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;  + http://google.com
+  + http://www.google.com
+  + https://google.com
+  + https://www.google.com
+  + https://www.google.com/doodles/
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -159,42 +144,36 @@ $ &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;Matches&lt;/span&g
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;google&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="k"&gt;Valid&lt;/span&gt; &lt;span class="n"&gt;URL&lt;/span&gt;
-&lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;google&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="k"&gt;Valid&lt;/span&gt; &lt;span class="n"&gt;URL&lt;/span&gt;
-&lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;google&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="k"&gt;Valid&lt;/span&gt; &lt;span class="n"&gt;URL&lt;/span&gt;
-&lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;google&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="k"&gt;Valid&lt;/span&gt; &lt;span class="n"&gt;URL&lt;/span&gt;
-&lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;google&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;doodles&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="k"&gt;Valid&lt;/span&gt; &lt;span class="n"&gt;URL&lt;/span&gt;
-&lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;google&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;doodles&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="k"&gt;not&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="k"&gt;Valid&lt;/span&gt; &lt;span class="n"&gt;URL&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;http://www.google.com is a Valid URL
+https://www.google.com is a Valid URL
+http://google.com is a Valid URL
+https://google.com is a Valid URL
+http://www.google.com/doodles/ is a Valid URL
+http://www.google.com /doodles/ is not a Valid URL
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;ul&gt;
-&lt;li&gt;To be honest, VerbalExpression is not completely well-built on Python. There are still some components missing. Remember that we have things like this in RegEx ?&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;Zero&lt;/span&gt; &lt;span class="k"&gt;or&lt;/span&gt; &lt;span class="k"&gt;more&lt;/span&gt;
-&lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;One&lt;/span&gt; &lt;span class="k"&gt;or&lt;/span&gt; &lt;span class="k"&gt;more&lt;/span&gt;
-&lt;span class="o"&gt;?&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;Zero&lt;/span&gt; &lt;span class="k"&gt;or&lt;/span&gt; &lt;span class="n"&gt;one&lt;/span&gt;
-&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;Exactly&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;n&amp;#39;&lt;/span&gt; &lt;span class="nb"&gt;number&lt;/span&gt;
-&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;Matches&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;n&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;or&lt;/span&gt; &lt;span class="k"&gt;more&lt;/span&gt; &lt;span class="n"&gt;occurrences&lt;/span&gt;
-&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="k"&gt;Between&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;n&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;and&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;m&amp;#39;&lt;/span&gt;
+&lt;p&gt;To be honest, VerbalExpression is not completely well-built on Python. There are still some components missing. Remember that we have things like this in RegEx ?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;* - Zero or more
++ - One or more
+? - Zero or one
+&lt;span class="nb"&gt;{&lt;/span&gt;n&lt;span class="nb"&gt;}&lt;/span&gt; - Exactly &amp;#39;n&amp;#39; number
+&lt;span class="nb"&gt;{&lt;/span&gt;n,&lt;span class="nb"&gt;}&lt;/span&gt; - Matches &amp;#39;n&amp;#39; or more occurrences
+&lt;span class="nb"&gt;{&lt;/span&gt;n,m&lt;span class="nb"&gt;}&lt;/span&gt; - Between &amp;#39;n&amp;#39; and &amp;#39;m&amp;#39;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;ul&gt;
-&lt;li&gt;For now VerbalExpression does not have any function to support this syntax. Hence, in order for us to use this, we need to manually add in.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;verbal_expression&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;--&amp;gt; * - Zero or more&lt;/span&gt;
-&lt;span class="n"&gt;verbal_expression&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;--&amp;gt; + - One or more&lt;/span&gt;
-&lt;span class="n"&gt;verbal_expression&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;--&amp;gt; ? - Zero or one&lt;/span&gt;
-&lt;span class="n"&gt;verbal_expression&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="c1"&gt;--&amp;gt; {n} - Exactly &amp;#39;n&amp;#39; number&lt;/span&gt;
-&lt;span class="n"&gt;verbal_expression&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;--&amp;gt; {n,} - Matches &amp;#39;n&amp;#39; or more occurrences&lt;/span&gt;
-&lt;span class="n"&gt;verbal_expression&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;--&amp;gt; {n,m} - Between &amp;#39;n&amp;#39; and &amp;#39;m&amp;#39;&lt;/span&gt;
+&lt;p&gt;For now VerbalExpression does not have any function to support this syntax. Hence, in order for us to use this, we need to manually add in.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;verbal&lt;span class="nb"&gt;_&lt;/span&gt;expression.add(&lt;span class="nb"&gt;{&lt;/span&gt;0,&lt;span class="nb"&gt;}&lt;/span&gt;)  --&amp;gt; * - Zero or more
+verbal&lt;span class="nb"&gt;_&lt;/span&gt;expression.add(&lt;span class="nb"&gt;{&lt;/span&gt;1,&lt;span class="nb"&gt;}&lt;/span&gt;)  --&amp;gt; + - One or more
+verbal&lt;span class="nb"&gt;_&lt;/span&gt;expression.add(&lt;span class="nb"&gt;{&lt;/span&gt;0,1&lt;span class="nb"&gt;}&lt;/span&gt;) --&amp;gt; ? - Zero or one
+verbal&lt;span class="nb"&gt;_&lt;/span&gt;expression.add(&lt;span class="nb"&gt;{&lt;/span&gt;n&lt;span class="nb"&gt;}&lt;/span&gt;)   --&amp;gt; &lt;span class="nb"&gt;{&lt;/span&gt;n&lt;span class="nb"&gt;}&lt;/span&gt; - Exactly &amp;#39;n&amp;#39; number
+verbal&lt;span class="nb"&gt;_&lt;/span&gt;expression.add(&lt;span class="nb"&gt;{&lt;/span&gt;n,&lt;span class="nb"&gt;}&lt;/span&gt;)  --&amp;gt; &lt;span class="nb"&gt;{&lt;/span&gt;n,&lt;span class="nb"&gt;}&lt;/span&gt; - Matches &amp;#39;n&amp;#39; or more occurrences
+verbal&lt;span class="nb"&gt;_&lt;/span&gt;expression.add(&lt;span class="nb"&gt;{&lt;/span&gt;n,m&lt;span class="nb"&gt;}&lt;/span&gt;) --&amp;gt; &lt;span class="nb"&gt;{&lt;/span&gt;n,m&lt;span class="nb"&gt;}&lt;/span&gt; - Between &amp;#39;n&amp;#39; and &amp;#39;m&amp;#39;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;ul&gt;
-&lt;li&gt;Let's find words consist of more than 2 "very" words&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;Let's find words consist of more than 2 "very" words&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;verbal_expression&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;VerEx&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;span class="n"&gt;tester&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;verbal_expression&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
             &lt;span class="n"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;very&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
@@ -230,8 +209,8 @@ $ &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;Matches&lt;/span&g
 &lt;h1&gt;What is a pipeline ?&lt;/h1&gt;
 &lt;p&gt;In a simple term, pipeline is a tool in sklearn package for …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In data science, one of the most tedious step that we need to perform is feature engineering and modeling. These steps are very repetitive. Luckily, creating a &lt;strong&gt;pipeline&lt;/strong&gt; can help us solve this problem.&lt;/p&gt;
 &lt;h1&gt;What is a pipeline ?&lt;/h1&gt;
-&lt;p&gt;In a simple term, pipeline is a tool in sklearn package for us to compose multiple estimators. For example, when we want to analyse a dataset, we may need to choose the features (columns) that we want, standardize them and apply the model. All of these steps can be escapulated in a &lt;code&gt;Pipeline&lt;/code&gt; &lt;/p&gt;
-&lt;p&gt;Assuming we have a dataset like the one below, and we want to predict which food a person wants to eat based on their gender, age, height, weight and an unknown feature "empty_col".&lt;/p&gt;
+&lt;p&gt;In a simple term, pipeline is a tool in sklearn package for us to compose multiple estimators. For example, when we want to analyse a dataset, we may need to choose the features (columns) that we want, standardize them and apply the model. All of these steps can be escapulated in a &lt;strong&gt;Pipeline&lt;/strong&gt; &lt;/p&gt;
+&lt;p&gt;Assuming we have a dataset like the one below, and we want to predict which food a person wants to eat based on their &lt;strong&gt;gender, age, height, weight and an unknown feature "empty_col"&lt;/strong&gt;.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Importing library&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pandas&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;pd&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
@@ -366,7 +345,7 @@ $ &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;Matches&lt;/span&g
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Let's say, for some reasons, the person analyzing this dataset only wants to use features &lt;code&gt;age, height, weight, and empty_col&lt;/code&gt; to predict the food.&lt;/p&gt;
+&lt;p&gt;Let's say, for some reasons, the person analyzing this dataset only wants to use features &lt;strong&gt;age, height, weight, and empty_col&lt;/strong&gt; to predict the food.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;X_train&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;drop&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;gender&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;axis&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -382,7 +361,7 @@ $ &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;Matches&lt;/span&g
     }
 
     .dataframe thead th {
-        text-align: right;
+        text-align: left;
     }
 &lt;/style&gt;
 &lt;table border="1" class="dataframe"&gt;
@@ -540,9 +519,10 @@ $ &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;Matches&lt;/span&g
 &lt;/table&gt;
 &lt;/div&gt;
 
-&lt;p&gt;The method shown above is one way to do it. However, imagine that we need to do it for so many datasets, it will become extremely tedious. In addition, when our datasets are getting more complicated, doing that way repetitively will make our code become hard to read. We are going to create a class that can automate that process, and can be put in a pipeline&lt;/p&gt;
+&lt;p&gt;The method shown above is one way to do it. However, imagine that we need to do it for so many datasets, it will become extremely tedious. &lt;/p&gt;
+&lt;p&gt;In addition, when our datasets are getting more complicated, doing that way repetitively will make our code become hard to read. We are going to create a class that can automate that process, and can be put in a pipeline&lt;/p&gt;
 &lt;h1&gt;Custom Transformers&lt;/h1&gt;
-&lt;p&gt;There are multiple written Transformers in Python such as StandardScaler, and LabelBinarizer. However, during our feature engineering, we usually need to write our own transformers. Here is the general template for a custom transformers:&lt;/p&gt;
+&lt;p&gt;There are multiple written Transformers in Python such as &lt;strong&gt;StandardScaler&lt;/strong&gt;, and &lt;strong&gt;LabelBinarizer&lt;/strong&gt;. However, during our feature engineering, we usually need to write our own transformers. Here is the general template for a custom transformers:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;MyTransformer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TransformerMixin&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;BaseEstimator&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
 
      &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
@@ -558,11 +538,11 @@ $ &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;Matches&lt;/span&g
 
 
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;TransformerMixin&lt;/code&gt; gives us the access to the extremely popular and useful &lt;code&gt;.fit_transform&lt;/code&gt; method.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;BaseEstimator&lt;/code&gt; will be very beneficial when we use &lt;code&gt;GridSearch&lt;/code&gt; function in the future as it helps us the the access to &lt;code&gt;.get_params&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;__init__&lt;/code&gt; is there so that we can intialize the transformer by just typing &lt;code&gt;MyTransformer()&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;fit&lt;/code&gt; will return self. We can see that even though we are not going to transform y, we still need to include it as a parameter and set it to None. This is because in case we want to include a model in a pipeline, a fit in those model will require a &lt;code&gt;y&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;transform&lt;/code&gt;: this is where all the magic happens, and our transformed X will be produced from here.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;TransformerMixin&lt;/strong&gt; gives us the access to the extremely popular and useful &lt;strong&gt;.fit_transform&lt;/strong&gt; method.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;BaseEstimator&lt;/strong&gt; will be very beneficial when we use &lt;strong&gt;GridSearch&lt;/strong&gt; function in the future as it helps us the the access to &lt;strong&gt;.get_params&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;strong&gt;init&lt;/strong&gt;&lt;/strong&gt; is there so that we can intialize the transformer by just typing &lt;strong&gt;MyTransformer()&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;fit&lt;/strong&gt; will return self. We can see that even though we are not going to transform y, we still need to include it as a parameter and set it to None. This is because in case we want to include a model in a pipeline, a fit in those model will require a &lt;strong&gt;y&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;transform&lt;/strong&gt;: this is where all the magic happens, and our transformed X will be produced from here.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;We are going to create our own transformers to choose the columns that we want&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# The code based on https://ramhiser.com/post/2018-04-16-building-scikit-learn-pipeline-with-pandas-dataframe/&lt;/span&gt;
@@ -602,7 +582,7 @@ $ &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;Matches&lt;/span&g
     }
 
     .dataframe thead th {
-        text-align: right;
+        text-align: left;
     }
 &lt;/style&gt;
 &lt;table border="1" class="dataframe"&gt;
@@ -687,7 +667,7 @@ $ &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;Matches&lt;/span&g
     }
 
     .dataframe thead th {
-        text-align: right;
+        text-align: left;
     }
 &lt;/style&gt;
 &lt;table border="1" class="dataframe"&gt;
@@ -740,7 +720,7 @@ $ &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;Matches&lt;/span&g
 &lt;/table&gt;
 &lt;/div&gt;
 
-&lt;p&gt;As we can see, &lt;code&gt;empty_col&lt;/code&gt; column has been removed since it has more than 50% missing values. However, if we use this function, we can't perform a similar transformation on the training data to a test data. Let's take a look at an example.&lt;/p&gt;
+&lt;p&gt;As we can see, &lt;strong&gt;empty_col&lt;/strong&gt; column has been removed since it has more than 50% missing values. However, if we use this function, we can't perform a similar transformation on the training data to a test data. Let's take a look at an example.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;data2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DataFrame&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;gender&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;choice&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;gender&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
                       &lt;span class="s2"&gt;&amp;quot;age&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sample&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
                       &lt;span class="s2"&gt;&amp;quot;height&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sample&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;150&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;170&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
@@ -772,7 +752,7 @@ $ &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;Matches&lt;/span&g
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;This dataset surely has no column having more than 50% missing value. However, we need to make our training and testing dataset to have the same column. If we use the &lt;code&gt;NotManyNaColumns&lt;/code&gt; as shown above, we will not get it.&lt;/p&gt;
+&lt;p&gt;This dataset surely has no column having more than 50% missing value. However, we need to make our training and testing dataset to have the same column. If we use the &lt;strong&gt;NotManyNaColumns&lt;/strong&gt; as shown above, we will not get it.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;na_col&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;NotManyNaColumns&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;na_col&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;transform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X_test&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -789,7 +769,7 @@ $ &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;Matches&lt;/span&g
     }
 
     .dataframe thead th {
-        text-align: right;
+        text-align: left;
     }
 &lt;/style&gt;
 &lt;table border="1" class="dataframe"&gt;
@@ -882,7 +862,7 @@ $ &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;Matches&lt;/span&g
     }
 
     .dataframe thead th {
-        text-align: right;
+        text-align: left;
     }
 &lt;/style&gt;
 &lt;table border="1" class="dataframe"&gt;
@@ -950,7 +930,7 @@ $ &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;Matches&lt;/span&g
     }
 
     .dataframe thead th {
-        text-align: right;
+        text-align: left;
     }
 &lt;/style&gt;
 &lt;table border="1" class="dataframe"&gt;
@@ -1003,7 +983,7 @@ $ &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;Matches&lt;/span&g
 &lt;/table&gt;
 &lt;/div&gt;
 
-&lt;p&gt;As we can see, our training data and testing data have the same columns, even though the &lt;code&gt;empty_col&lt;/code&gt; column in the testing data does not have more than 50% missing value.&lt;/p&gt;
+&lt;p&gt;As we can see, our training data and testing data have the same columns, even though the &lt;strong&gt;empty_col&lt;/strong&gt; column in the testing data does not have more than 50% missing value.&lt;/p&gt;
 &lt;h1&gt;Pipeline&lt;/h1&gt;
 &lt;p&gt;Finally, we are going to learn about Pipeline !!! Normally, we are going to analyse our data using this way&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Select Column&lt;/span&gt;
@@ -1041,7 +1021,7 @@ $ &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;Matches&lt;/span&g
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;There are so many steps that we need to do as shown above. We can make things shorter by using &lt;code&gt;make_pipeline&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;There are so many steps that we need to do as shown above. We can make things shorter by using &lt;strong&gt;make_pipeline&lt;/strong&gt;.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pipe&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;make_pipeline&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ColumnSelector&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;columns&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;age&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;height&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;weight&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;empty_col&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]),&lt;/span&gt;
                      &lt;span class="n"&gt;NotManyNaColumns&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
                      &lt;span class="n"&gt;StandardScaler&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt;
@@ -1104,21 +1084,21 @@ $ &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;Matches&lt;/span&g
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;[2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0]
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h2&gt;Why is List Comprehension better than traditonal Loop ?&lt;/h2&gt;
-&lt;p&gt;&lt;code&gt;Good programmers write code that humans can understand. 
-                                           Martin Fowler&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;strong&gt;Good programmers write code that humans can understand. 
+                                           Martin Fowler&lt;/strong&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;List comprehension clearly makes our code much more readable and shorter than traditional loop. As we can see from the code above, it reduces 3 lines of code into 1. Anyone with a basic understanding of list comprehension can easily understand it.&lt;/p&gt;
 &lt;p&gt;In addition, list comprehension is also faster than traditional loop. One of the reason is that it doesn't need to load the append attribute of the list and call it as a function at each iteration&lt;/p&gt;
 &lt;h2&gt;How do we write a list comprehension ?&lt;/h2&gt;
 &lt;p&gt;I used to know a lot of people having hard time with using list comprehension as they are too comfortable with using traditonal loop; and hence, less willing to change.&lt;/p&gt;
 &lt;p&gt;To be honest, creating a list comprehension is even easier than making a traditional loop as you do not even need to use .append.&lt;/p&gt;
-&lt;p&gt;Normally, the format of a list comprehension will be : &lt;code&gt;[expression for item in list]&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;Expression&lt;/code&gt; is just the method that you want to transform each element of your list&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;item&lt;/code&gt; is each element in your list&lt;/p&gt;
+&lt;p&gt;Normally, the format of a list comprehension will be : &lt;strong&gt;[expression for item in list]&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Expression&lt;/strong&gt; is just the method that you want to transform each element of your list&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;item&lt;/strong&gt; is each element in your list&lt;/p&gt;
 &lt;h2&gt;Type of List Comprehension&lt;/h2&gt;
 &lt;h3&gt;1. Unconditional List Comprehension&lt;/h3&gt;
 &lt;p&gt;We have a list of name, and we want to captitalize all the letters of every name in the list&lt;/p&gt;
