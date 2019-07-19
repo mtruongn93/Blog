@@ -226,7 +226,7 @@ $ &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;Matches&lt;/span&g
 &lt;span class="n"&gt;very&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="k"&gt;not&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;correct&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt;
 &lt;span class="n"&gt;veryvery&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;correct&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt;
 &lt;span class="n"&gt;veryveryvery&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;correct&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</content><category term="python"></category></entry><entry><title>Pipeline</title><link href="https://mtruongn93.github.io/blog/blog-2.html" rel="alternate"></link><published>2019-07-04T10:20:00-04:00</published><updated>2019-07-04T10:20:00-04:00</updated><author><name>Minh Truong</name></author><id>tag:mtruongn93.github.io,2019-07-04:/blog/blog-2.html</id><summary type="html">&lt;p&gt;In data science, one of the most tedious step that we need to perform is feature engineering and modeling. These steps are very repetitive. Luckily, creating a &lt;strong&gt;pipeline&lt;/strong&gt; can help us solve this problem.&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="python"></category></entry><entry><title>Pipeline</title><link href="https://mtruongn93.github.io/blog/pipeline.html" rel="alternate"></link><published>2019-07-04T10:20:00-04:00</published><updated>2019-07-04T10:20:00-04:00</updated><author><name>Minh Truong</name></author><id>tag:mtruongn93.github.io,2019-07-04:/blog/pipeline.html</id><summary type="html">&lt;p&gt;In data science, one of the most tedious step that we need to perform is feature engineering and modeling. These steps are very repetitive. Luckily, creating a &lt;strong&gt;pipeline&lt;/strong&gt; can help us solve this problem.&lt;/p&gt;
 &lt;h1&gt;What is a pipeline ?&lt;/h1&gt;
 &lt;p&gt;In a simple term, pipeline is a tool in sklearn package for …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In data science, one of the most tedious step that we need to perform is feature engineering and modeling. These steps are very repetitive. Luckily, creating a &lt;strong&gt;pipeline&lt;/strong&gt; can help us solve this problem.&lt;/p&gt;
 &lt;h1&gt;What is a pipeline ?&lt;/h1&gt;
@@ -277,7 +277,7 @@ $ &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;Matches&lt;/span&g
     }
 
     .dataframe thead th {
-        text-align: right;
+        text-align: left;
     }
 &lt;/style&gt;
 
@@ -1070,7 +1070,7 @@ $ &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;Matches&lt;/span&g
 
 
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;45&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</content><category term="python"></category></entry><entry><title>List Comprehension</title><link href="https://mtruongn93.github.io/blog/blog-1.html" rel="alternate"></link><published>2019-06-16T10:20:00-04:00</published><updated>2019-06-16T10:20:00-04:00</updated><author><name>Minh Truong</name></author><id>tag:mtruongn93.github.io,2019-06-16:/blog/blog-1.html</id><summary type="html">&lt;p&gt;If you are a new Python user, or a loop addicted user, it's time for you to consider to change to something new, something that makes your code run faster, and look much better.&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="python"></category></entry><entry><title>List Comprehension</title><link href="https://mtruongn93.github.io/blog/list-comprehension.html" rel="alternate"></link><published>2019-06-16T10:20:00-04:00</published><updated>2019-06-16T10:20:00-04:00</updated><author><name>Minh Truong</name></author><id>tag:mtruongn93.github.io,2019-06-16:/blog/list-comprehension.html</id><summary type="html">&lt;p&gt;If you are a new Python user, or a loop addicted user, it's time for you to consider to change to something new, something that makes your code run faster, and look much better.&lt;/p&gt;
 &lt;p&gt;Introducing &lt;strong&gt;List Comprehension&lt;/strong&gt;&lt;/p&gt;
 &lt;h2&gt;What is List Comprehension ?&lt;/h2&gt;
 &lt;p&gt;List comprehension is just a succint and elegant way …&lt;/p&gt;</summary><content type="html">&lt;p&gt;If you are a new Python user, or a loop addicted user, it's time for you to consider to change to something new, something that makes your code run faster, and look much better.&lt;/p&gt;
@@ -1104,7 +1104,7 @@ $ &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;Matches&lt;/span&g
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;[2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0]
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -1311,7 +1311,7 @@ $ &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;Matches&lt;/span&g
     }
 
     .dataframe thead th {
-        text-align: right;
+        text-align: left;
     }
 &lt;/style&gt;
 &lt;table border="1" class="dataframe"&gt;
