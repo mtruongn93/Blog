@@ -243,6 +243,7 @@ aside > h2 {
     padding: 1em;
     margin-left: 1em;
     margin-top: 0;
+    font-weight : bold; font-size :18px
   }
 
   #avatar {
