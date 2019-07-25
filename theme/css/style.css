@@ -125,7 +125,7 @@ aside {
   text-align: center;
   padding-top: 8%;
   background-size: cover;
-  background-image: url('https://raw.githubusercontent.com/SMassey25/Understanding_Data/gh-pages/theme/images/aside.jpg');
+  background-image: url('https://cdn.shopify.com/s/files/1/1898/0427/products/Dark_blue_2048x2048.jpg?v=1546596991');
 }
 
 aside > ul {
@@ -245,4 +245,15 @@ aside > h2 {
 
 img {
   max-width: 100%;
+}
+
+table {
+    margin-bottom: 1rem;
+    width: 100%;
+    border: 1px solid #e5e5e5;
+    border-collapse: collapse;
+}
+
+tbody tr:nth-child(odd) td, tbody tr:nth-child(odd) th {
+    background-color: #f9f9f9;
 }
