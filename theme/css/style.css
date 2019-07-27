@@ -1,16 +1,16 @@
 html {
-  font-family: 'Open Sans', 'helvetica', sans-serif;
+  font-family: ubuntu;
   background: white;
-  font-size: 14px;
+  /* font-size: 14px; */
 }
 
 /* Titles */
 h1 { text-transform: uppercase }
 h1, h2 {
 	font-weight: bold;
-  font-size:25px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+	font-size: 25px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 
@@ -23,7 +23,7 @@ h1, h2 {
   color: #1DAEDF;
   line-height: 1;
   font-weight: 600;
-  font-family: "my homely";
+  font-family: ubuntu;
 }
 
 .latest
@@ -62,7 +62,7 @@ article section .blog-post
 /* Body */
 body {margin: 0}
 body > article, footer {
-  line-height: 1.6em;
+  /* line-height: 1.6em; */
   display: block;
   max-width: 700px;
   margin: 40px auto auto 355px;
@@ -175,7 +175,7 @@ aside > h2 {
 
 .nav > ul > li
 {
-  font-size: 15px;
+  font-size: 22px;
 }
 
 .nav a
@@ -260,8 +260,8 @@ tbody tr:nth-child(odd) td, tbody tr:nth-child(odd) th {
     background-color: #f9f9f9;
 }
 
-h1 { font-family: Ubuntu; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 15.4px; }
+h1 {font-family: Ubuntu;font-size: 21px;font-style: normal;font-variant: normal;font-weight: 700;line-height: 15.4px;}
 h3 { font-family: Ubuntu; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 15.4px; }
-p { font-family: Ubuntu; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 20px; }
+p {font-family: Ubuntu;font-size: 17px;font-style: normal;font-variant: normal;font-weight: 400;line-height: 20px;}
 blockquote { font-family: Ubuntu; font-size: 21px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 30px; }
 pre { font-family: Ubuntu; font-size: 13px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 18.5714px; }
