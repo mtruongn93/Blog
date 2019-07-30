@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en" itemscope itemtype="http://schema.org/Person">
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Ubuntu" />
+<head>
+  <meta charset="utf-8">
+  <!-- Site Meta Data -->
+  <title>Bayesian with PyMC3</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Minh Truong">
+
+  <link rel="shortcut icon" href="url-to-favicon">
+
+  <!-- schema.org -->
+  <meta itemprop="name" content="Minh Truong">
+  <meta itemprop="image" content="">
+  <meta itemprop="description" content="">
+
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+  <!-- Style Meta Data -->
+  <link rel="stylesheet" href="https://mtruongn93.github.io/blog/theme/css/style.css" type="text/css" />
+  <link rel="stylesheet" href="https://mtruongn93.github.io/blog/theme/css/pygments.css" type="text/css" />
+
+  <!-- Feed Meta Data -->
+    <link href="https://mtruongn93.github.io/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Minh Truong ATOM Feed" />
+
+  <!-- Twitter Feed -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="twitter-user-name">
+  <meta name="twitter:image" content="">
+
+<meta name="twitter:creator" content="twitter-user-name">
+<meta name="twitter:url" content="https://mtruongn93.github.io/blog/bayesian.html">
+<meta name="twitter:title" content="Minh Truong ~ Bayesian with PyMC3">
+<meta name="twitter:description" content="<h1>What is Bayesian Statistics ?</h1>
+<p>“Bayesian statistics is a mathematical procedure that applies probabilities to statistical problems. It provides people the tools to update their beliefs in the evidence of new data.”</p>
+<p>In simple words, Bayesian statistic is a technique where we start with our prior beliefs about something based on …</p>">
+
+<!-- Facebook Meta Data -->
+<meta property="og:title" content="Minh Truong ~ Bayesian with PyMC3" />
+<meta property="og:description" content="<h1>What is Bayesian Statistics ?</h1>
+<p>“Bayesian statistics is a mathematical procedure that applies probabilities to statistical problems. It provides people the tools to update their beliefs in the evidence of new data.”</p>
+<p>In simple words, Bayesian statistic is a technique where we start with our prior beliefs about something based on …</p>" />
+<meta property="og:image" content="" />
+</head>
+
+<body>
+  <!-- Sidebar -->
+  <aside>
+    <!--<center><a href="https://mtruongn93.github.io/blog"><img id="avatar" src=""></a></center>-->
+    <h1>Minh Truong</h1>
+      <p>90% Data Scientist, 9% Data Engineer, 1% Hacker !!!</p>
+    <br>
+
+    <!--       <a class="twitter-follow-button"
+      href="https://twitter.com/twitter-user-name"
+      data-show-count="false"
+      data-lang="en">
+      Follow @twitterdev
+      </a>
+      <script type="text/javascript">
+      window.twttr = (function (d, s, id) {
+        var t, js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src= "https://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+        return window.twttr || (t = { _e: [], ready: function (f) { t._e.push(f) } });
+      }(document, "script", "twitter-wjs"));
+      </script>
+ -->
+
+    <nav class="nav">
+      <ul class="list-bare">
+
+          <li><a class="nav__link" href="https://mtruongn93.github.io/blog">Blog</a></li>
+
+
+      </ul>
+    </nav>
+
+    <p class="social">
+        <a href="https://www.linkedin.com/in/nhat-minh-truong/" target="_blank" ><img src="https://mtruongn93.github.io/blog/theme/images/icons/linkedin.png"></a>
+        <a href="https://github.com/mtruongn93" target="_blank" ><img src="https://mtruongn93.github.io/blog/theme/images/icons/github.png"></a>
+      <!--       <a href="https://mtruongn93.github.io/blog/feeds/all.atom.xml" rel="alternate">
+        <img src="https://mtruongn93.github.io/blog/theme/images/icons/rss.png"></a>
+ -->
+    </p>
+
+    <!--
+    <h2>Categories</h2>
+    <ul class="navbar">
+      <li class="active"><a href="https://mtruongn93.github.io/blog/category/misc.html">misc</a></li>
+    </ul>
+    -->
+  </aside>
+
+  <!-- Content -->
+  <article>
+<section id="content">
+    <article>
+        <h2 class="post_title post_detail"><a href="https://mtruongn93.github.io/blog/bayesian.html" rel="bookmark" title="Permalink to Bayesian with PyMC3">Bayesian with PyMC3</a></h2>
+        <div class="entry-content blog-post">
+            <h1>What is Bayesian Statistics ?</h1>
+<p>“Bayesian statistics is a mathematical procedure that applies probabilities to statistical problems. It provides people the tools to update their beliefs in the evidence of new data.”</p>
+<p>In simple words, Bayesian statistic is a technique where we start with our prior beliefs about something based on our prior research. These beliefs will then be adjusted and combined with the data. The result that we use to make a prediction will not only be a single number, but a distribution of likely answers.</p>
+<p>This technique is much better than any advanced machine algorithm in a sense that it is not a black box, and can be easily understood by observers. In addition, it does not require a huge collection of data.</p>
+<h1>Bayes Rule</h1>
+<p>Bayes rule based on conditonal probability. Let's try to derive the Bayes formula based on our simple understanding of conditional probability.
+<img alt="png" src="images/Capture.png"></p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">binom</span><span class="p">,</span> <span class="n">beta</span>
+<span class="c1">## We want to vary p from 0 to 1.</span>
+<span class="n">lst</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="c1">## Set up prior.</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">prior</span> <span class="o">=</span> <span class="p">[</span><span class="n">beta</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">]</span>
+
+<span class="c1">## Set up likelihood.</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">90</span>
+<span class="n">likelihood</span> <span class="o">=</span> <span class="p">[</span><span class="n">binom</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">k</span> <span class="o">=</span> <span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">]</span>
+
+<span class="c1">## Calculate posterior based on prior and likelihood.</span>
+<span class="n">posterior</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">prior</span><span class="p">,</span> <span class="n">likelihood</span><span class="p">)</span>
+
+<span class="c1">## Plot prior, likelihood, and posterior.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Prior, Likelihood, and Posterior&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="n">prior</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;tab:green&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="n">likelihood</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;tab:red&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="n">posterior</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;tab:blue&#39;</span><span class="p">);</span>
+</pre></div>
+
+
+<p><img alt="png" src="images/output_3_0.png"></p>
+<h1>PyMC3</h1>
+<p>In the past, people need to calculate these things by hand. However, luckily, in Python, we have a package that can help us performing all the steps.</p>
+<p>Let's try to replicate the previous example with PyMC3.</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pymc3</span> <span class="kn">as</span> <span class="nn">pm</span>
+<span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
+    <span class="c1"># Set priors for parameters</span>
+    <span class="n">prior</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Beta</span><span class="p">(</span><span class="s2">&quot;prior&quot;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">beta</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="n">likelihood</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Binomial</span><span class="p">(</span><span class="s2">&quot;likelihood&quot;</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="mf">0.9</span><span class="p">)</span>
+    <span class="n">trace</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="n">tune</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">traceplot</span><span class="p">(</span><span class="n">trace</span><span class="p">)</span>
+</pre></div>
+
+
+<p><img alt="png" src="images/output_8_1.png"></p>
+<div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">plot_posterior</span><span class="p">(</span><span class="n">trace</span><span class="p">)</span>
+</pre></div>
+
+
+<p><img alt="png" src="images/output_9_1.png"></p>
+<p>Let's have another example then we can analyze what those graphs mean.</p>
+<p>Assuming I have the data for the price of a regular concert. We will perform Bayesian inference on this data.</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">skewnorm</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">price</span> <span class="o">=</span> <span class="n">skewnorm</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">plot_kde</span><span class="p">(</span><span class="n">price</span><span class="p">)</span>
+</pre></div>
+
+
+<p><img alt="png" src="images/output_12_1.png"></p>
+<p>Before performing, let's set some of our prior and likelihood.</p>
+<p>For priors:
+- mu, which is the mean of the price. Without any knowledge, I will make it follow Uniform distribution. Luckily, I know one thing that the price cannot be lower than 0 and cannot be higher than 300. Hence, I will set the lower boundary = 0, and the upper boundary = 300
+- sigma, which is the standard deviation of the price. I do not have that much knowledge about this too. Hence, I will just set it as half normal distribution as it can only be positive.</p>
+<p>For likelihood function:
+- The price will be normal distributed with the priors $\mu$ and $\sigma$</p>
+<p>$$
+\begin{align}
+\mu &amp;\sim \mathcal{U}(0, 300) \
+\sigma &amp;\sim |\mathcal{N}(0,10)| \
+y &amp;\sim \mathcal{N}(\mu, \sigma)
+\end{align}
+$$</p>
+<div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_g</span><span class="p">:</span>
+    <span class="n">mu</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="s1">&#39;mu&#39;</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+    <span class="n">sigma</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s1">&#39;sigma&#39;</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">price</span><span class="p">)</span>
+    <span class="n">trace</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">tune</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">traceplot</span><span class="p">(</span><span class="n">trace</span><span class="p">)</span>
+</pre></div>
+
+
+<p><img alt="png" src="images/output_16_1.png"></p>
+<ul>
+<li>On the left, we have KDE (Kernel Density Estimate) plot, as we can see, we have 4 diffrent color lines, each line represents 1 chain in the process. From these 4 lines, we can briefly estimate where our real mu and sigma are</li>
+<li>On the right, we have the trace plot. This represents the value of each steps during the process </li>
+</ul>
+<div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">plot_posterior</span><span class="p">(</span><span class="n">trace</span><span class="p">)</span>
+</pre></div>
+
+
+<p><img alt="png" src="images/output_18_1.png"></p>
+<ul>
+<li>From this plot, we can interpret that 94% the belief for the mean ticket price is between 75.3 and 96.7.</li>
+<li>We can say the same thing for sigma that 94% the belief for the standard deviation of the ticket price is between 52.4 and 64.3</li>
+</ul>
+        </div>
+        <div class="post_list">
+            <span>By </span>
+            <!-- <a href="https://mtruongn93.github.io/blog/author/minh-truong.html">@Minh Truong</a> -->
+            <!-- <span> in </span>
+            <span class="post_category"><a href="https://mtruongn93.github.io/blog/category/misc.html" rel="bookmark" title="Permalink to misc">[ misc ]</a></span> -->
+            <span class="post_date">Tue 30 July 2019</span>
+            <div><span>Tags : </span>
+                <span><a href="https://mtruongn93.github.io/blog/tag/python.html">#python, </a></span>
+            </div>
+
+            <div class="entry-social">
+                <span class="twitter"><a target="_blank" rel="nofollow" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=700');return false;" title="Twitter" href="https://twitter.com/share?url=https://mtruongn93.github.io/blog/bayesian.html&text=Bayesian with PyMC3&via=twitter-user-name"><img src="https://mtruongn93.github.io/blog/theme/images/icons/twitter-s.png"></a></span>
+
+                <span class="gplus"><a target="_blank" title="Google +" href="https://plus.google.com/share?url=https://mtruongn93.github.io/blog/bayesian.html&hl=fr" rel="nofollow" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=650');return false;"><img src="https://mtruongn93.github.io/blog/theme/images/icons/google-s.png"></a></span>
+
+                <span class="facebook"><a target="_blank" title="Facebook" rel="nofollow" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;" href="https://www.facebook.com/sharer.php?u=https://mtruongn93.github.io/blog/bayesian.html&t=Bayesian with PyMC3"><img src="https://mtruongn93.github.io/blog/theme/images/icons/facebook-s.png"></a></span>
+
+                <a  target="_blank" title="Linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=https://mtruongn93.github.io/blog/bayesian.html&title=Bayesian with PyMC3" rel="nofollow" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=650');return false;"><img src="https://mtruongn93.github.io/blog/theme/images/icons/linkedin-s.png"></a>
+
+                <span class="mail"><a href="mailto:?subject=Bayesian with PyMC3&amp;body=Viens découvrir un article à propos de [Bayesian with PyMC3] sur le site de Minh Truong. https://mtruongn93.github.io/blog/bayesian.html" title="Share by Email" target="_blank"><img src="https://mtruongn93.github.io/blog/theme/images/icons/mail-s.png"></a></span>
+            </div>
+        </div>
+    </article>
+</section>
+  </article>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      <!-- Blog powered by <a href="http://getpelican.com/">Pelican</a>,
+      which takes great advantage of <a href="http://python.org">Python</a>.
+      Theme <a href="https://github.com/parbhat/pelican-blue">Pelican-Blue</a> by <a href="https://parbhatpuri.com/">@parbhat</a>. -->
+      Copyright © Minh Truong 2019
+
+    </p>
+  </footer>
+
+
+</body>
+</html>
