@@ -6,8 +6,8 @@
 &lt;p&gt;In simple words, Bayesian statistic is a technique where we start with our prior beliefs about something based on our prior research. These beliefs will then be adjusted and combined with the data. The result that we use to make a prediction will not only be a single number, but a distribution of likely answers.&lt;/p&gt;
 &lt;p&gt;This technique is much better than any advanced machine algorithm in a sense that it is not a black box, and can be easily understood by observers. In addition, it does not require a huge collection of data.&lt;/p&gt;
 &lt;h1&gt;Bayes Rule&lt;/h1&gt;
-&lt;p&gt;Bayes rule based on conditonal probability. Let's try to derive the Bayes formula based on our simple understanding of conditional probability.
-&lt;img alt="png" src="images/Capture.png"&gt;&lt;/p&gt;
+&lt;p&gt;Bayes rule based on conditonal probability. Let's try to derive the Bayes formula based on our simple understanding of conditional probability.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="png" src="images/Capture.PNG"&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;matplotlib.pyplot&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;plt&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;scipy.stats&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;binom&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;beta&lt;/span&gt;
