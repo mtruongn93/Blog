@@ -136,6 +136,7 @@
 
 
 <p><img alt="png" src="images/output_3_0.png"></p>
+<p><img alt="" src="images\Capture2.png"></p>
 <h1>PyMC3</h1>
 <p>In the past, people need to calculate these things by hand. However, luckily, in Python, we have a package that can help us performing all the steps.</p>
 <p>Let's try to replicate the previous example with PyMC3.</p>
@@ -176,14 +177,8 @@
 - mu, which is the mean of the price. Without any knowledge, I will make it follow Uniform distribution. Luckily, I know one thing that the price cannot be lower than 0 and cannot be higher than 300. Hence, I will set the lower boundary = 0, and the upper boundary = 300
 - sigma, which is the standard deviation of the price. I do not have that much knowledge about this too. Hence, I will just set it as half normal distribution as it can only be positive.</p>
 <p>For likelihood function:
-- The price will be normal distributed with the priors $\mu$ and $\sigma$</p>
-<p>$$
-\begin{align}
-\mu &amp;\sim \mathcal{U}(0, 300) \
-\sigma &amp;\sim |\mathcal{N}(0,10)| \
-y &amp;\sim \mathcal{N}(\mu, \sigma)
-\end{align}
-$$</p>
+- The price will be normal distributed with the priors mu and sigma</p>
+<p><img alt="" src="images\Capture3.png"></p>
 <div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_g</span><span class="p">:</span>
     <span class="n">mu</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="s1">&#39;mu&#39;</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
     <span class="n">sigma</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s1">&#39;sigma&#39;</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>

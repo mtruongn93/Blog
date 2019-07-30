@@ -36,6 +36,7 @@
 
 
 &lt;p&gt;&lt;img alt="png" src="images/output_3_0.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="images\Capture2.png"&gt;&lt;/p&gt;
 &lt;h1&gt;PyMC3&lt;/h1&gt;
 &lt;p&gt;In the past, people need to calculate these things by hand. However, luckily, in Python, we have a package that can help us performing all the steps.&lt;/p&gt;
 &lt;p&gt;Let's try to replicate the previous example with PyMC3.&lt;/p&gt;
@@ -76,14 +77,8 @@
 - mu, which is the mean of the price. Without any knowledge, I will make it follow Uniform distribution. Luckily, I know one thing that the price cannot be lower than 0 and cannot be higher than 300. Hence, I will set the lower boundary = 0, and the upper boundary = 300
 - sigma, which is the standard deviation of the price. I do not have that much knowledge about this too. Hence, I will just set it as half normal distribution as it can only be positive.&lt;/p&gt;
 &lt;p&gt;For likelihood function:
-- The price will be normal distributed with the priors $\mu$ and $\sigma$&lt;/p&gt;
-&lt;p&gt;$$
-\begin{align}
-\mu &amp;amp;\sim \mathcal{U}(0, 300) \
-\sigma &amp;amp;\sim |\mathcal{N}(0,10)| \
-y &amp;amp;\sim \mathcal{N}(\mu, \sigma)
-\end{align}
-$$&lt;/p&gt;
+- The price will be normal distributed with the priors mu and sigma&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="images\Capture3.png"&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;pm&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Model&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;model_g&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="n"&gt;mu&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pm&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Uniform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;mu&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lower&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;upper&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;300&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;sigma&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pm&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;HalfNormal&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;sigma&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sd&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
