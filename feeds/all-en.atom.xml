@@ -31,7 +31,8 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Let's start by importing all the package that we need&lt;img alt="enough_talk" src="images/enough_talk.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="enough_talk" src="images/enough_talk.png"&gt;&lt;/p&gt;
+&lt;p&gt;Let's start by importing all the package that we need&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Import libraries and modules&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;matplotlib.pyplot&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;plt&lt;/span&gt;
