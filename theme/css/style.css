@@ -111,7 +111,7 @@ a:hover { text-decoration: underline; }
 .highlight pre {
   font-size: 14px;
   margin-left: 1%;
-  /* overflow: scroll; */
+  overflow: auto;
 }
 
 /* Sidebar */
@@ -264,4 +264,4 @@ h1 {font-family: Ubuntu;font-size: 21px;font-style: normal;font-variant: normal;
 h3 { font-family: Ubuntu; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 15.4px; }
 p {font-family: Ubuntu;font-size: 15px;font-style: normal;font-variant: normal;font-weight: 400;line-height: 20px;}
 blockquote { font-family: Ubuntu; font-size: 21px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 30px; }
-pre {font-family: Ubuntu;font-size: 13px;font-style: normal;font-variant: normal;font-weight: 400;line-height: 18.5714px;}
+pre {/* font-family: Ubuntu; */font-size: 13px;font-style: normal;font-variant: normal;font-weight: 400;line-height: 18.5714px;padding-top: 0.5%;padding-bottom: 0.5%;}
