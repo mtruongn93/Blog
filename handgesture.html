@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="en" itemscope itemtype="http://schema.org/Person">
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Ubuntu" />
+<head>
+  <meta charset="utf-8">
+  <!-- Site Meta Data -->
+  <title>Hand Gesture Detection using Machine Learning</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Minh Truong">
+
+  <link rel="shortcut icon" href="url-to-favicon">
+
+  <!-- schema.org -->
+  <meta itemprop="name" content="Minh Truong">
+  <meta itemprop="image" content="">
+  <meta itemprop="description" content="">
+
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+  <!-- Style Meta Data -->
+  <link rel="stylesheet" href="https://mtruongn93.github.io/blog/theme/css/style.css" type="text/css" />
+  <link rel="stylesheet" href="https://mtruongn93.github.io/blog/theme/css/pygments.css" type="text/css" />
+
+  <!-- Feed Meta Data -->
+    <link href="https://mtruongn93.github.io/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Minh Truong ATOM Feed" />
+
+  <!-- Twitter Feed -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="twitter-user-name">
+  <meta name="twitter:image" content="">
+
+<meta name="twitter:creator" content="twitter-user-name">
+<meta name="twitter:url" content="https://mtruongn93.github.io/blog/handgesture.html">
+<meta name="twitter:title" content="Minh Truong ~ Hand Gesture Detection using Machine Learning">
+<meta name="twitter:description" content="<h1>Hand Gesture Detection using Machine Learning</h1>
+<p>There are multiple way to detect hand gesture without using Machine Learning algorithm such as using color histograms and HOG classifiers, edge detection or background subtraction. However, these methods tend to not very robust as it can be affected by the unusual background or …</p>">
+
+<!-- Facebook Meta Data -->
+<meta property="og:title" content="Minh Truong ~ Hand Gesture Detection using Machine Learning" />
+<meta property="og:description" content="<h1>Hand Gesture Detection using Machine Learning</h1>
+<p>There are multiple way to detect hand gesture without using Machine Learning algorithm such as using color histograms and HOG classifiers, edge detection or background subtraction. However, these methods tend to not very robust as it can be affected by the unusual background or …</p>" />
+<meta property="og:image" content="" />
+</head>
+
+<body>
+  <!-- Sidebar -->
+  <aside>
+    <!--<center><a href="https://mtruongn93.github.io/blog"><img id="avatar" src=""></a></center>-->
+    <h1>Minh Truong</h1>
+      <p>90% Data Scientist, 9% Data Engineer, 1% Hacker !!!</p>
+    <br>
+
+    <!--       <a class="twitter-follow-button"
+      href="https://twitter.com/twitter-user-name"
+      data-show-count="false"
+      data-lang="en">
+      Follow @twitterdev
+      </a>
+      <script type="text/javascript">
+      window.twttr = (function (d, s, id) {
+        var t, js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src= "https://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+        return window.twttr || (t = { _e: [], ready: function (f) { t._e.push(f) } });
+      }(document, "script", "twitter-wjs"));
+      </script>
+ -->
+
+    <nav class="nav">
+      <ul class="list-bare">
+
+          <li><a class="nav__link" href="https://mtruongn93.github.io/blog">Blog</a></li>
+
+
+      </ul>
+    </nav>
+
+    <p class="social">
+        <a href="https://www.linkedin.com/in/nhat-minh-truong/" target="_blank" ><img src="https://mtruongn93.github.io/blog/theme/images/icons/linkedin.png"></a>
+        <a href="https://github.com/mtruongn93" target="_blank" ><img src="https://mtruongn93.github.io/blog/theme/images/icons/github.png"></a>
+      <!--       <a href="https://mtruongn93.github.io/blog/feeds/all.atom.xml" rel="alternate">
+        <img src="https://mtruongn93.github.io/blog/theme/images/icons/rss.png"></a>
+ -->
+    </p>
+
+    <!--
+    <h2>Categories</h2>
+    <ul class="navbar">
+      <li class="active"><a href="https://mtruongn93.github.io/blog/category/misc.html">misc</a></li>
+    </ul>
+    -->
+  </aside>
+
+  <!-- Content -->
+  <article>
+<section id="content">
+    <article>
+        <h2 class="post_title post_detail"><a href="https://mtruongn93.github.io/blog/handgesture.html" rel="bookmark" title="Permalink to Hand Gesture Detection using Machine Learning">Hand Gesture Detection using Machine Learning</a></h2>
+        <div class="entry-content blog-post">
+            <h1>Hand Gesture Detection using Machine Learning</h1>
+<p>There are multiple way to detect hand gesture without using Machine Learning algorithm such as using color histograms and HOG classifiers, edge detection or background subtraction. However, these methods tend to not very robust as it can be affected by the unusual background or changes in lighting conditions.</p>
+<p>With a large datasets with different hand gestures, we can train the model using neural networks. This will somewhat better than the methods mentioned above, even though it will take sometimes for us to train the model.</p>
+<h2>Data Preprocessing</h2>
+<p>I found a dataset of hand gestures on <a href="https://www.kaggle.com/gti-upm/leapgestrecog">Kaggle</a>. This dataset contains 10 different gestures from 10 different people. For each gestures of each person, there will be 200 images of them.</p>
+<p>The database structure will look like this:</p>
+<div class="highlight"><pre><span></span><span class="p">.</span>
+<span class="o">+</span><span class="c1">-- 00</span>
+<span class="o">|</span>   <span class="o">+</span><span class="c1">-- 01_palm</span>
+<span class="o">|</span>       <span class="o">+</span><span class="c1">-- frame_00_01_0001.png</span>
+<span class="o">|</span>       <span class="o">+</span><span class="c1">-- frame_00_01_0002.png</span>
+<span class="o">|</span>       <span class="o">+</span><span class="c1">-- ....</span>
+<span class="o">|</span>   <span class="o">+</span><span class="c1">-- 02_l</span>
+<span class="o">|</span>       <span class="o">+</span><span class="c1">-- frame_00_02_0001.png</span>
+<span class="o">|</span>       <span class="o">+</span><span class="c1">-- frame_00_02_0002.png</span>
+<span class="o">|</span>       <span class="o">+</span><span class="c1">-- ....</span>
+<span class="p">....</span>
+<span class="o">|</span>   <span class="o">+</span><span class="c1">-- 09_c</span>
+<span class="o">|</span>       <span class="o">+</span><span class="c1">-- frame_00_09_0001.png</span>
+<span class="o">|</span>       <span class="o">+</span><span class="c1">-- frame_00_09_0002.png</span>
+<span class="o">|</span>       <span class="o">+</span><span class="c1">-- ....</span>
+<span class="o">|</span>   <span class="o">+</span><span class="c1">-- 010_down</span>
+<span class="o">|</span>       <span class="o">+</span><span class="c1">-- frame_00_10_0001.png</span>
+<span class="o">|</span>       <span class="o">+</span><span class="c1">-- frame_00_10_0002.png</span>
+<span class="o">|</span>       <span class="o">+</span><span class="c1">-- ....</span>
+<span class="o">+</span><span class="c1">-- 01</span>
+<span class="p">...</span>
+<span class="o">+</span><span class="c1">-- 10</span>
+</pre></div>
+
+
+<p>Let's start by importing all the package that we need</p>
+<div class="highlight"><pre><span></span><span class="c1"># Import libraries and modules</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.style</span> <span class="kn">as</span> <span class="nn">style</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="c1"># For reproducibility</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Dropout</span><span class="p">,</span> <span class="n">Activation</span><span class="p">,</span> <span class="n">Flatten</span><span class="p">,</span> <span class="n">Input</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">Conv2D</span><span class="p">,</span> <span class="n">MaxPooling2D</span>
+
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;seaborn-whitegrid&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>We are going to get into each person folder, and process all the images for each gestures.</p>
+<p>Sadly, my computer is too weak to process everything. I am going to train only on 5 gestures. For each person, I am going to get only 100 images for each gesture.</p>
+<p>For each image, I am going to resize them to 200 x 200, and make it becomes grey. In my opinion, changing the color of the image to grey will not affect our overall performance. In addition, having grey color images will help us to train our model much faster.</p>
+<p>We also need to convert the image to an array, as our neural network only takes in numbers, not images. Make sure that type of our array to be <strong>float32</strong> so that the neural network can work smoothly. Moreover, we also need to make sure that the number in an array is within (0,1). The reason for all of this can be found <a href="https://datascience.stackexchange.com/questions/13636/neural-network-data-type-conversion-float-from-int">here</a> and <a href="https://stackoverflow.com/questions/4674623/why-do-we-have-to-normalize-the-input-for-an-artificial-neural-network">here</a>.</p>
+<div class="highlight"><pre><span></span><span class="c1"># Get the name of all outer folder such as 00, 01, ..., 10</span>
+<span class="n">folder_name1</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span> 
+                <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> 
+                <span class="ow">and</span> <span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;0&quot;</span><span class="p">)]</span>
+
+<span class="c1"># Get the name of all inner folder such as 01_palm, 02_l, ..., 10_down</span>
+<span class="n">folder_name2</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s2">&quot;./00&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">folder1</span> <span class="ow">in</span> <span class="n">folder_name1</span><span class="p">:</span>
+    <span class="c1"># only get 5 gestures :(</span>
+    <span class="k">for</span> <span class="n">folder2</span> <span class="ow">in</span> <span class="n">folder_name2</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]:</span>
+        <span class="n">files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">folder1</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">folder2</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="s2">&quot;*.png&quot;</span><span class="p">)</span>
+        <span class="c1"># only get 100 images</span>
+        <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">100</span><span class="p">]:</span>
+            <span class="c1"># converting image to grey scale</span>
+            <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s1">&#39;L&#39;</span><span class="p">)</span>
+            <span class="c1"># resize image to 200 * 200</span>
+            <span class="n">img</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">resize</span><span class="p">((</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span>
+            <span class="c1"># converting image to an array</span>
+            <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+            <span class="c1"># make sure that the array is float</span>
+            <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="s2">&quot;float32&quot;</span><span class="p">)</span>
+            <span class="c1"># since all the number is within (0,255), </span>
+            <span class="c1"># dividing this to 255 will make the numbers</span>
+            <span class="c1"># within (0,1)</span>
+            <span class="n">img</span> <span class="o">/=</span> <span class="mi">255</span>
+            <span class="c1"># you do not need to do this step, I just want</span>
+            <span class="c1"># to reverse the color (eg: black to white)</span>
+            <span class="n">img</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span><span class="n">img</span>
+
+            <span class="n">X</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+
+            <span class="n">label</span> <span class="o">=</span> <span class="n">folder2</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="c1"># list of gesture that we are going to predict</span>
+<span class="nb">set</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="err">{</span><span class="s1">&#39;fist&#39;</span><span class="p">,</span> <span class="s1">&#39;fist_moved&#39;</span><span class="p">,</span> <span class="s1">&#39;l&#39;</span><span class="p">,</span> <span class="s1">&#39;palm&#39;</span><span class="p">,</span> <span class="s1">&#39;thumb&#39;</span><span class="err">}</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="c1"># the shape of each of our images</span>
+<span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="c1"># Check shape of full training data.</span>
+<span class="n">X_train</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">3750</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+</pre></div>
+
+
+<p>We need to reshape each image to be 200 x 200 x 1. This allows our neural network to know that there's only one value (how dark the pixel is) instead of multiple values per pixel. For example, a color image stored in RGB (red/green/blue) might have shape 200 x 200 x 3, where one value is corresponds to how red the pixel is, one value corresponds to how blue the pixel is, and one value corresponds to how green the pixel is.</p>
+<div class="highlight"><pre><span></span><span class="c1"># Reshape each image to be 200 x 200 x 1.</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">3750</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+
+<p>We also need to LabelBinarizer our target. This step is very important in classifying. Imagine there is a case where we need to predict class 1 or class 2. Without LabelBinarizer, the neural will understand 1 and 2 as a numerical instead of categorical values</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">LabelBinarizer</span>
+
+<span class="n">lb</span> <span class="o">=</span> <span class="n">LabelBinarizer</span><span class="p">()</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">lb</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">lb</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+
+
+<h2>Model</h2>
+<p>We are going to use <strong>Convolutional Neural Networks (CNNs)</strong> for this model. CNNs are complex feed forward neural networks that are perfect for image processing as it can condense the image to a smaller size so that the neural networks can run on.</p>
+<p>CNNs generally consist of:
+- one or more convolutional layers
+- one or more pooling layers, and
+- one or more fully connected layers</p>
+<p>Let's talk briefly about convolutional layers. This is a layers used to detect "things" in images. In those layers, multiple filters are applied. Each filter will create its own layers for the image (eg: 32x32x1 can become 28x28x6). Usually early convolutional layers will detect the edge, later layers detect structures, and the final layers detect the entire objects.</p>
+<p><img alt="convolutional_layer" src="images/convolutional_layer.gif"></p>
+<p>Pooling layers is just another block of CNN. Its main purpose is to reduce the spatial size of the image, which reduces the amount of parameters for the network to train on. Generally, max pooling is used.</p>
+<p><img alt="pooling1" src="images/pooling1.gif"></p>
+<p>Here is the whole network topology for CNNs</p>
+<p><img alt="CNN" src="images/CNN.jpg"></p>
+<p>Let's start building the model. You can play around with the filters size, kernel size or pooling size. We use ReLU as the activation function because it  can speeding up the training process. The computational step of ReLU is simple as it is only <strong>max(0,input number)</strong>. <strong>Softmax</strong> is also used as we are classifying multiple classes. If you only classify 2 classes, you can use <strong>sigmoid</strong> instead.</p>
+<div class="highlight"><pre><span></span><span class="c1"># Instantiate a CNN</span>
+<span class="n">cnn_model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">cnn_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mi">1</span><span class="p">)))</span>
+
+<span class="c1"># add a convolutional layer</span>
+<span class="n">cnn_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Conv2D</span><span class="p">(</span><span class="n">filters</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span>
+                     <span class="n">kernel_size</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+                     <span class="n">activation</span> <span class="o">=</span> <span class="s2">&quot;relu&quot;</span><span class="p">))</span>
+
+<span class="c1"># add a pooling layer</span>
+<span class="n">cnn_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)))</span>
+
+<span class="c1"># add a convolutional layer</span>
+<span class="n">cnn_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Conv2D</span><span class="p">(</span><span class="n">kernel_size</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+                     <span class="n">filters</span> <span class="o">=</span> <span class="mi">16</span><span class="p">,</span>
+                     <span class="n">activation</span> <span class="o">=</span> <span class="s2">&quot;relu&quot;</span><span class="p">))</span>
+
+<span class="c1"># add a pooling layer</span>
+<span class="n">cnn_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)))</span>
+
+<span class="c1"># add a convolutional layer</span>
+<span class="n">cnn_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Conv2D</span><span class="p">(</span><span class="n">kernel_size</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+                     <span class="n">filters</span> <span class="o">=</span> <span class="mi">26</span><span class="p">,</span>
+                     <span class="n">activation</span> <span class="o">=</span> <span class="s2">&quot;relu&quot;</span><span class="p">))</span>
+
+<span class="c1"># add a pooling layer</span>
+<span class="n">cnn_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)))</span>
+
+<span class="c1"># flatten the 3D array to 1D array</span>
+<span class="n">cnn_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Flatten</span><span class="p">())</span>
+
+<span class="c1"># add in first perceptrons</span>
+<span class="n">cnn_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">activation</span> <span class="o">=</span> <span class="s2">&quot;relu&quot;</span><span class="p">))</span>
+
+<span class="c1"># add in second perceptrons</span>
+<span class="n">cnn_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">activation</span> <span class="o">=</span> <span class="s2">&quot;relu&quot;</span><span class="p">))</span>
+
+<span class="c1"># output</span>
+<span class="n">cnn_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lb</span><span class="o">.</span><span class="n">classes_</span><span class="p">),</span> <span class="n">activation</span> <span class="o">=</span> <span class="s2">&quot;softmax&quot;</span><span class="p">))</span>
+
+<span class="n">cnn_model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">Model</span><span class="p">:</span> <span class="ss">&quot;sequential&quot;</span>
+<span class="n">_________________________________________________________________</span>
+<span class="n">Layer</span> <span class="p">(</span><span class="k">type</span><span class="p">)</span>                 <span class="k">Output</span> <span class="n">Shape</span>              <span class="n">Param</span> <span class="o">#</span>   
+<span class="o">=================================================================</span>
+<span class="n">conv2d</span> <span class="p">(</span><span class="n">Conv2D</span><span class="p">)</span>              <span class="p">(</span><span class="k">None</span><span class="p">,</span> <span class="mi">198</span><span class="p">,</span> <span class="mi">198</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>       <span class="mi">60</span>        
+<span class="n">_________________________________________________________________</span>
+<span class="n">max_pooling2d</span> <span class="p">(</span><span class="n">MaxPooling2D</span><span class="p">)</span> <span class="p">(</span><span class="k">None</span><span class="p">,</span> <span class="mi">66</span><span class="p">,</span> <span class="mi">66</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>         <span class="mi">0</span>         
+<span class="n">_________________________________________________________________</span>
+<span class="n">conv2d_1</span> <span class="p">(</span><span class="n">Conv2D</span><span class="p">)</span>            <span class="p">(</span><span class="k">None</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>        <span class="mi">880</span>       
+<span class="n">_________________________________________________________________</span>
+<span class="n">max_pooling2d_1</span> <span class="p">(</span><span class="n">MaxPooling2</span> <span class="p">(</span><span class="k">None</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>        <span class="mi">0</span>         
+<span class="n">_________________________________________________________________</span>
+<span class="n">conv2d_2</span> <span class="p">(</span><span class="n">Conv2D</span><span class="p">)</span>            <span class="p">(</span><span class="k">None</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">26</span><span class="p">)</span>        <span class="mi">3770</span>      
+<span class="n">_________________________________________________________________</span>
+<span class="n">max_pooling2d_2</span> <span class="p">(</span><span class="n">MaxPooling2</span> <span class="p">(</span><span class="k">None</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">26</span><span class="p">)</span>          <span class="mi">0</span>         
+<span class="n">_________________________________________________________________</span>
+<span class="n">flatten</span> <span class="p">(</span><span class="n">Flatten</span><span class="p">)</span>            <span class="p">(</span><span class="k">None</span><span class="p">,</span> <span class="mi">936</span><span class="p">)</span>               <span class="mi">0</span>         
+<span class="n">_________________________________________________________________</span>
+<span class="n">dense</span> <span class="p">(</span><span class="n">Dense</span><span class="p">)</span>                <span class="p">(</span><span class="k">None</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>               <span class="mi">119936</span>    
+<span class="n">_________________________________________________________________</span>
+<span class="n">dense_1</span> <span class="p">(</span><span class="n">Dense</span><span class="p">)</span>              <span class="p">(</span><span class="k">None</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span>                <span class="mi">8256</span>      
+<span class="n">_________________________________________________________________</span>
+<span class="n">dense_2</span> <span class="p">(</span><span class="n">Dense</span><span class="p">)</span>              <span class="p">(</span><span class="k">None</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>                 <span class="mi">325</span>       
+<span class="o">=================================================================</span>
+<span class="n">Total</span> <span class="n">params</span><span class="p">:</span> <span class="mi">133</span><span class="p">,</span><span class="mi">227</span>
+<span class="n">Trainable</span> <span class="n">params</span><span class="p">:</span> <span class="mi">133</span><span class="p">,</span><span class="mi">227</span>
+<span class="n">Non</span><span class="o">-</span><span class="n">trainable</span> <span class="n">params</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">_________________________________________________________________</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="c1"># Compile model</span>
+<span class="n">cnn_model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span>
+                  <span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adam&#39;</span><span class="p">,</span>
+                  <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="c1"># Fit model on training data</span>
+<span class="n">history</span> <span class="o">=</span> <span class="n">cnn_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span>
+                        <span class="n">y_train</span><span class="p">,</span>
+                        <span class="n">batch_size</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span>
+                        <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">),</span>
+                        <span class="n">epochs</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                        <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">Train</span> <span class="k">on</span> <span class="mi">3750</span> <span class="n">samples</span><span class="p">,</span> <span class="n">validate</span> <span class="k">on</span> <span class="mi">1250</span> <span class="n">samples</span>
+<span class="n">Epoch</span> <span class="mi">1</span><span class="o">/</span><span class="mi">5</span>
+<span class="mi">3750</span><span class="o">/</span><span class="mi">3750</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">27</span><span class="n">s</span> <span class="mi">7</span><span class="n">ms</span><span class="o">/</span><span class="n">sample</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mi">1</span><span class="p">.</span><span class="mi">5284</span> <span class="o">-</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">5336</span> <span class="o">-</span> <span class="n">val_loss</span><span class="p">:</span> <span class="mi">1</span><span class="p">.</span><span class="mi">3553</span> <span class="o">-</span> <span class="n">val_accuracy</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">6784</span>
+<span class="n">Epoch</span> <span class="mi">2</span><span class="o">/</span><span class="mi">5</span>
+<span class="mi">3750</span><span class="o">/</span><span class="mi">3750</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">24</span><span class="n">s</span> <span class="mi">6</span><span class="n">ms</span><span class="o">/</span><span class="n">sample</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0569</span> <span class="o">-</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">7360</span> <span class="o">-</span> <span class="n">val_loss</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">6921</span> <span class="o">-</span> <span class="n">val_accuracy</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">8088</span>
+<span class="n">Epoch</span> <span class="mi">3</span><span class="o">/</span><span class="mi">5</span>
+<span class="mi">3750</span><span class="o">/</span><span class="mi">3750</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">23</span><span class="n">s</span> <span class="mi">6</span><span class="n">ms</span><span class="o">/</span><span class="n">sample</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">5634</span> <span class="o">-</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">8019</span> <span class="o">-</span> <span class="n">val_loss</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">3798</span> <span class="o">-</span> <span class="n">val_accuracy</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">8728</span>
+<span class="n">Epoch</span> <span class="mi">4</span><span class="o">/</span><span class="mi">5</span>
+<span class="mi">3750</span><span class="o">/</span><span class="mi">3750</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">25</span><span class="n">s</span> <span class="mi">7</span><span class="n">ms</span><span class="o">/</span><span class="n">sample</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">3088</span> <span class="o">-</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">8875</span> <span class="o">-</span> <span class="n">val_loss</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">2085</span> <span class="o">-</span> <span class="n">val_accuracy</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">9352</span>
+<span class="n">Epoch</span> <span class="mi">5</span><span class="o">/</span><span class="mi">5</span>
+<span class="mi">3750</span><span class="o">/</span><span class="mi">3750</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">25</span><span class="n">s</span> <span class="mi">7</span><span class="n">ms</span><span class="o">/</span><span class="n">sample</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">2041</span> <span class="o">-</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">9288</span> <span class="o">-</span> <span class="n">val_loss</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">1406</span> <span class="o">-</span> <span class="n">val_accuracy</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">9576</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="c1"># Check out our train loss and test loss over epochs.</span>
+<span class="n">train_loss</span> <span class="o">=</span> <span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">]</span>
+<span class="n">test_loss</span> <span class="o">=</span> <span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;val_loss&#39;</span><span class="p">]</span>
+
+<span class="c1"># Set figure size.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="c1"># Generate line plot of training, testing loss over epochs.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">train_loss</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Training Loss&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#185fad&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">test_loss</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Testing Loss&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+
+<span class="c1"># Set title</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Training and Testing Loss by Epoch&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">25</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Epoch&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Categorical Crossentropy&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span> <span class="o">=</span> <span class="mi">18</span><span class="p">);</span>
+</pre></div>
+
+
+<p><img alt="png" src="images/output_26_0.png"></p>
+<p>As we can see, both the testing and training loss is getting lower and lower. We can try to run the fitting process 1 more time to get a better result.</p>
+<p>Let's check how accurate our prediction is:</p>
+<div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">suppress</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span> <span class="p">:</span> <span class="n">y</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lb</span><span class="o">.</span><span class="n">classes_</span><span class="p">)}</span>
+<span class="n">predict_0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">cnn_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">X_test</span><span class="p">[</span><span class="mi">0</span><span class="p">]])))</span>
+<span class="n">labels</span><span class="p">[</span><span class="n">predict_0</span><span class="p">]</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="s1">&#39;palm&#39;</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span>
+</pre></div>
+
+
+<p><img alt="png" src="images/output_29_1.png"></p>
+<p>Let's look at the confusion matrix.</p>
+<div class="highlight"><pre><span></span><span class="n">y_pred</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">cnn_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)]</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">y_pred</span> <span class="o">=</span> <span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">y_pred</span><span class="p">]</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span>
+<span class="n">con_matrix</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">lb</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">y_test</span><span class="p">),</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">con_matrix</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">lb</span><span class="o">.</span><span class="n">classes_</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">lb</span><span class="o">.</span><span class="n">classes_</span><span class="p">)</span>
+</pre></div>
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>fist</th>
+      <th>fist_moved</th>
+      <th>l</th>
+      <th>palm</th>
+      <th>thumb</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>fist</th>
+      <td>237</td>
+      <td>7</td>
+      <td>0</td>
+      <td>0</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>fist_moved</th>
+      <td>21</td>
+      <td>210</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>l</th>
+      <td>1</td>
+      <td>2</td>
+      <td>270</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>palm</th>
+      <td>0</td>
+      <td>2</td>
+      <td>2</td>
+      <td>242</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>thumb</th>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>238</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>It is not a surprised when we have some bad predictions between fist and fist_moved. There are also some confusion on the fist and the thumb</p>
+<h2>Capture and predict the gesture through camera</h2>
+<p>The code below allows you to predict your hand gesture through your own camera. However, unfortunately, this datasets is not suitable for predicting gesture in regular lighting since most of them are captured in the dark. I have tried to adjust the lighting, flip or rotate; but it still does not work. You can try to create you dataset and try.</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cv2</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">cap</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="k">while</span> <span class="p">(</span><span class="bp">True</span><span class="p">):</span>
+    <span class="n">ret</span><span class="p">,</span> <span class="n">frame</span> <span class="o">=</span> <span class="n">cap</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s2">&quot;frame&quot;</span><span class="p">,</span><span class="n">frame</span><span class="p">)</span>
+
+    <span class="n">gray</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2GRAY</span><span class="p">)</span>
+
+    <span class="c1"># Capture the image by pressing q</span>
+    <span class="k">if</span> <span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xFF</span> <span class="o">==</span> <span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">):</span>
+
+        <span class="c1"># Show the captured image</span>
+        <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s2">&quot;frame2&quot;</span><span class="p">,</span><span class="n">gray</span><span class="p">)</span>
+
+        <span class="c1"># Resize the capture image by transforming it</span>
+        <span class="c1"># the same way with our dataset</span>
+        <span class="n">frame_new</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">gray</span><span class="p">,</span> <span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span>
+        <span class="n">frame_new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">frame_new</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="s2">&quot;float32&quot;</span><span class="p">)</span>
+        <span class="n">frame_new</span> <span class="o">/=</span> <span class="mi">255</span>
+        <span class="n">frame_new</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">frame_new</span>
+        <span class="n">frame_new</span> <span class="o">=</span> <span class="n">frame_new</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># Predict the captured image</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">cnn_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">frame_new</span><span class="p">))</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="n">result</span><span class="p">])</span>
+
+
+    <span class="c1"># close the video by pressing escape</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="mi">27</span><span class="p">:</span>
+        <span class="k">break</span>
+
+<span class="n">cap</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">destroyAllWindows</span><span class="p">()</span>
+</pre></div>
+
+
+<h2>Conclusion</h2>
+<p>Luckily we do not run into any overfit problems. If you have any overfit problems (loss of training dataset decreases while that of testing set increases), you can apply some regularization such as <strong>L1/L2 regularization, dropout or early stopping</strong></p>
+<p>It is a bit unfortunate for me to be unable to run the whole datasets and to test this on my own camera. I will build my own dataset with proper lighting in the future, and run this on the cloud server such as AWS.</p>
+        </div>
+        <div class="post_list">
+            <span>By </span>
+            <!-- <a href="https://mtruongn93.github.io/blog/author/minh-truong.html">@Minh Truong</a> -->
+            <!-- <span> in </span>
+            <span class="post_category"><a href="https://mtruongn93.github.io/blog/category/misc.html" rel="bookmark" title="Permalink to misc">[ misc ]</a></span> -->
+            <span class="post_date">Tue 30 July 2019</span>
+            <div><span>Tags : </span>
+                <span><a href="https://mtruongn93.github.io/blog/tag/python.html">#python, </a></span>
+            </div>
+
+            <div class="entry-social">
+                <span class="twitter"><a target="_blank" rel="nofollow" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=700');return false;" title="Twitter" href="https://twitter.com/share?url=https://mtruongn93.github.io/blog/handgesture.html&text=Hand Gesture Detection using Machine Learning&via=twitter-user-name"><img src="https://mtruongn93.github.io/blog/theme/images/icons/twitter-s.png"></a></span>
+
+                <span class="gplus"><a target="_blank" title="Google +" href="https://plus.google.com/share?url=https://mtruongn93.github.io/blog/handgesture.html&hl=fr" rel="nofollow" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=650');return false;"><img src="https://mtruongn93.github.io/blog/theme/images/icons/google-s.png"></a></span>
+
+                <span class="facebook"><a target="_blank" title="Facebook" rel="nofollow" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;" href="https://www.facebook.com/sharer.php?u=https://mtruongn93.github.io/blog/handgesture.html&t=Hand Gesture Detection using Machine Learning"><img src="https://mtruongn93.github.io/blog/theme/images/icons/facebook-s.png"></a></span>
+
+                <a  target="_blank" title="Linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=https://mtruongn93.github.io/blog/handgesture.html&title=Hand Gesture Detection using Machine Learning" rel="nofollow" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=650');return false;"><img src="https://mtruongn93.github.io/blog/theme/images/icons/linkedin-s.png"></a>
+
+                <span class="mail"><a href="mailto:?subject=Hand Gesture Detection using Machine Learning&amp;body=Viens découvrir un article à propos de [Hand Gesture Detection using Machine Learning] sur le site de Minh Truong. https://mtruongn93.github.io/blog/handgesture.html" title="Share by Email" target="_blank"><img src="https://mtruongn93.github.io/blog/theme/images/icons/mail-s.png"></a></span>
+            </div>
+        </div>
+    </article>
+</section>
+  </article>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      <!-- Blog powered by <a href="http://getpelican.com/">Pelican</a>,
+      which takes great advantage of <a href="http://python.org">Python</a>.
+      Theme <a href="https://github.com/parbhat/pelican-blue">Pelican-Blue</a> by <a href="https://parbhatpuri.com/">@parbhat</a>. -->
+      Copyright © Minh Truong 2019
+
+    </p>
+  </footer>
+
+
+</body>
+</html>
