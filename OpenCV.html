@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en" itemscope itemtype="http://schema.org/Person">
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Ubuntu" />
+<head>
+  <meta charset="utf-8">
+  <!-- Site Meta Data -->
+  <title>Introduction to OpenCV</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Minh Truong">
+
+  <link rel="shortcut icon" href="url-to-favicon">
+
+  <!-- schema.org -->
+  <meta itemprop="name" content="Minh Truong">
+  <meta itemprop="image" content="">
+  <meta itemprop="description" content="">
+
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+  <!-- Style Meta Data -->
+  <link rel="stylesheet" href="https://mtruongn93.github.io/blog/theme/css/style.css" type="text/css" />
+  <link rel="stylesheet" href="https://mtruongn93.github.io/blog/theme/css/pygments.css" type="text/css" />
+
+  <!-- Feed Meta Data -->
+    <link href="https://mtruongn93.github.io/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Minh Truong ATOM Feed" />
+
+  <!-- Twitter Feed -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="twitter-user-name">
+  <meta name="twitter:image" content="">
+
+<meta name="twitter:creator" content="twitter-user-name">
+<meta name="twitter:url" content="https://mtruongn93.github.io/blog/OpenCV.html">
+<meta name="twitter:title" content="Minh Truong ~ Introduction to OpenCV">
+<meta name="twitter:description" content="<h1>Introduction to OpenCV</h1>
+<p>If you are a person who wants to perform image classification, video classification or just simply want to play with images on Python, OpenCV is one of the most popular package out there to help you with it.</p>
+<h1>Loading and Displaying images</h1>
+<p>Let's start with importing packages …</p>">
+
+<!-- Facebook Meta Data -->
+<meta property="og:title" content="Minh Truong ~ Introduction to OpenCV" />
+<meta property="og:description" content="<h1>Introduction to OpenCV</h1>
+<p>If you are a person who wants to perform image classification, video classification or just simply want to play with images on Python, OpenCV is one of the most popular package out there to help you with it.</p>
+<h1>Loading and Displaying images</h1>
+<p>Let's start with importing packages …</p>" />
+<meta property="og:image" content="" />
+</head>
+
+<body>
+  <!-- Sidebar -->
+  <aside>
+    <!--<center><a href="https://mtruongn93.github.io/blog"><img id="avatar" src=""></a></center>-->
+    <h1>Minh Truong</h1>
+      <p>90% Data Scientist, 9% Data Engineer, 1% Hacker !!!</p>
+    <br>
+
+    <!--       <a class="twitter-follow-button"
+      href="https://twitter.com/twitter-user-name"
+      data-show-count="false"
+      data-lang="en">
+      Follow @twitterdev
+      </a>
+      <script type="text/javascript">
+      window.twttr = (function (d, s, id) {
+        var t, js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src= "https://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+        return window.twttr || (t = { _e: [], ready: function (f) { t._e.push(f) } });
+      }(document, "script", "twitter-wjs"));
+      </script>
+ -->
+
+    <nav class="nav">
+      <ul class="list-bare">
+
+          <li><a class="nav__link" href="https://mtruongn93.github.io/blog">Blog</a></li>
+
+
+      </ul>
+    </nav>
+
+    <p class="social">
+        <a href="https://www.linkedin.com/in/nhat-minh-truong/" target="_blank" ><img src="https://mtruongn93.github.io/blog/theme/images/icons/linkedin.png"></a>
+        <a href="https://github.com/mtruongn93" target="_blank" ><img src="https://mtruongn93.github.io/blog/theme/images/icons/github.png"></a>
+      <!--       <a href="https://mtruongn93.github.io/blog/feeds/all.atom.xml" rel="alternate">
+        <img src="https://mtruongn93.github.io/blog/theme/images/icons/rss.png"></a>
+ -->
+    </p>
+
+    <!--
+    <h2>Categories</h2>
+    <ul class="navbar">
+      <li class="active"><a href="https://mtruongn93.github.io/blog/category/misc.html">misc</a></li>
+    </ul>
+    -->
+  </aside>
+
+  <!-- Content -->
+  <article>
+<section id="content">
+    <article>
+        <h2 class="post_title post_detail"><a href="https://mtruongn93.github.io/blog/OpenCV.html" rel="bookmark" title="Permalink to Introduction to OpenCV">Introduction to OpenCV</a></h2>
+        <div class="entry-content blog-post">
+            <h1>Introduction to OpenCV</h1>
+<p>If you are a person who wants to perform image classification, video classification or just simply want to play with images on Python, OpenCV is one of the most popular package out there to help you with it.</p>
+<h1>Loading and Displaying images</h1>
+<p>Let's start with importing packages that we need</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">import</span> <span class="nn">imutils</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+</pre></div>
+
+
+<p>We are going to load a soccer image, and print out the current width, height, and depth.</p>
+<div class="highlight"><pre><span></span><span class="c1"># load image</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;soccer.jpg&#39;</span><span class="p">)</span>
+
+<span class="c1"># check the width, height, and depth</span>
+<span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;width={}, height={}, depth={}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">width</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">168</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">3</span>
+</pre></div>
+
+
+<p>As you can see, there is no image shown above. In order for us to see the image, we need to employ <strong>cv2.imshow("Image", image)</strong></p>
+<div class="highlight"><pre><span></span><span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s2">&quot;Soccer&quot;</span><span class="p">,</span> <span class="n">image</span><span class="p">)</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">destroyAllWindows</span><span class="p">()</span>
+</pre></div>
+
+
+<p><img alt="" src="images/soccer.png"></p>
+<p>There will be a new windown shown as above. As we can see, this new window is called <strong>Soccer</strong> as we define in <strong>cv2.imshow</strong>.</p>
+<p>We also need <strong>cv2.waitKey(0)</strong> so that the window will not close immediately after opening.</p>
+<p>We also need <strong>cv2.destroyAllWindows()</strong> so that we can close it whenever we want. Without this, everything will be not responding.</p>
+<h1>Resizing images</h1>
+<p>Resizing images is extremely important in many projects involving image classification. Resizing images helps to process the image to fit better to the neural network. This also makes the model to run faster and more effective. In addition, sometimes, the training images and testing images have different dimension; hence, we need to make sure they are the same by resizing.</p>
+<div class="highlight"><pre><span></span><span class="n">resized_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">),</span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Original Image&#39;</span><span class="p">),</span> <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([]),</span> <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">),</span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">resized_image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Resized Image&#39;</span><span class="p">),</span> <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([]),</span> <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+
+<p><img alt="png" src="images/output_11_0.png"></p>
+<h1>Drawing on images</h1>
+<p>In this section, I am going to show you how to draw rectangle, circle, line, or write a text message on an image. Since drawing on an image will overwrite the previous file, we need to create a copy of it</p>
+<div class="highlight"><pre><span></span><span class="n">draw_image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</pre></div>
+
+
+<h2>Line</h2>
+<p>Let's start with drawing a line. in order for us to draw a line, we need 5 things:
+- image
+- staring coordinate 
+- ending coordinate
+- color
+- thickness</p>
+<p>For example, if we want to draw a blue line with thickness of 2 diagonally from the most top left corner to the most bottom right corner. We are going to draw the following way.</p>
+<p><strong>Note:</strong> Color in cv2 is represented as (B,G,R) instead of (R,G,B)</p>
+<div class="highlight"><pre><span></span><span class="c1"># most top left corner</span>
+<span class="n">start</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># most bottom right corner, </span>
+<span class="c1"># w and h is the width and height of the image</span>
+<span class="n">end</span> <span class="o">=</span> <span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">h</span><span class="p">)</span>
+
+<span class="c1"># to get blue, we let B = 255, while the rest equal to 0</span>
+<span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">thickness</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">cv2</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">draw_image</span><span class="p">,</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">thickness</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">),</span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Original Image&#39;</span><span class="p">),</span> <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([]),</span> <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">),</span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">draw_image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Resized Image&#39;</span><span class="p">),</span> <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([]),</span> <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+</pre></div>
+
+
+<p><img alt="png" src="images/output_17_1.png"></p>
+<h2>Rectangle</h2>
+<p>Similar to line, in order for us to draw rectangle, we also need 5 things:
+- image
+- staring coordinate which is on the top left
+- ending coordinate which is on the bottom right
+- color
+- thickness</p>
+<p>Let's try to draw a red rectangle with thickness of 2 around the face of players by pre-determined the coordinates</p>
+<div class="highlight"><pre><span></span><span class="n">draw_image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># top left corner of 1st rectangle</span>
+<span class="n">start</span> <span class="o">=</span> <span class="p">(</span><span class="mi">110</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># bottom right corner of 1st rectangle</span>
+<span class="n">end</span> <span class="o">=</span> <span class="p">(</span><span class="mi">140</span><span class="p">,</span><span class="mi">40</span><span class="p">)</span>
+
+<span class="c1"># to get red, we let R = 255, while the rest equal to 0</span>
+<span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">)</span>
+<span class="n">thickness</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">cv2</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="n">draw_image</span><span class="p">,</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">thickness</span><span class="p">)</span>
+
+<span class="c1"># top left corner of 2nd rectangle</span>
+<span class="n">start</span> <span class="o">=</span> <span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="c1"># bottom right corner of 2nd rectangle</span>
+<span class="n">end</span> <span class="o">=</span> <span class="p">(</span><span class="mi">230</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span>
+
+<span class="n">cv2</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="n">draw_image</span><span class="p">,</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">thickness</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">),</span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Original Image&#39;</span><span class="p">),</span> <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([]),</span> <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">),</span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">draw_image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Resized Image&#39;</span><span class="p">),</span> <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([]),</span> <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+</pre></div>
+
+
+<p><img alt="png" src="images/output_20_1.png"></p>
+<h2>Circle</h2>
+<p>To draw a circle, we also need 5 things. However, they will be slightly different from line and rectangle
+- image
+- center coordinate of the circle
+- radius in pixels
+- color
+- thickness</p>
+<p><strong>Note:</strong> for the thickness, in order to get a fill in circle, we can put in a negative value</p>
+<p>Let's try to draw green circle around the players face</p>
+<div class="highlight"><pre><span></span><span class="n">draw_image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># center of the 1st circle</span>
+<span class="n">center</span> <span class="o">=</span> <span class="p">(</span><span class="mi">120</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="c1"># radius of the 1st circle</span>
+<span class="n">radius</span> <span class="o">=</span> <span class="mi">17</span>
+
+<span class="c1"># to get green, we let G = 255, while the rest equal to 0</span>
+<span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">thickness</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">cv2</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="n">draw_image</span><span class="p">,</span> <span class="n">center</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">thickness</span><span class="p">)</span>
+
+<span class="c1"># center of the 2nd circle</span>
+<span class="n">center</span> <span class="o">=</span> <span class="p">(</span><span class="mi">210</span><span class="p">,</span><span class="mi">35</span><span class="p">)</span>
+
+<span class="c1"># radius of the 2nd circle</span>
+<span class="n">radius</span> <span class="o">=</span> <span class="mi">17</span>
+
+<span class="n">cv2</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="n">draw_image</span><span class="p">,</span> <span class="n">center</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">thickness</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">),</span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Original Image&#39;</span><span class="p">),</span> <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([]),</span> <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">),</span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">draw_image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Resized Image&#39;</span><span class="p">),</span> <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([]),</span> <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+</pre></div>
+
+
+<p><img alt="png" src="images/output_22_1.png"></p>
+<h2>Text</h2>
+<p>To draw a text on an image, we need to use <strong>putText</strong> function. Different from the others, we need 7 things:
+- image
+- text
+- starting point for the text
+- font
+- font size
+- color of the text
+- thickness of the text</p>
+<div class="highlight"><pre><span></span><span class="n">draw_image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Soccer !!!&quot;</span>
+<span class="n">start</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">25</span><span class="p">)</span>
+<span class="n">font</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">FONT_HERSHEY_SIMPLEX</span>
+<span class="n">scale</span> <span class="o">=</span> <span class="mf">0.7</span>
+<span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">thick</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">cv2</span><span class="o">.</span><span class="n">putText</span><span class="p">(</span><span class="n">draw_image</span><span class="p">,</span> <span class="s2">&quot;Soccer !!!&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span> <span class="n">cv2</span><span class="o">.</span><span class="n">FONT_HERSHEY_SIMPLEX</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">),</span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Original Image&#39;</span><span class="p">),</span> <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([]),</span> <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">),</span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">draw_image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Resized Image&#39;</span><span class="p">),</span> <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([]),</span> <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+</pre></div>
+
+
+<p><img alt="png" src="images/output_25_1.png"></p>
+<h1>Image preprocessing</h1>
+<p>Sometimes, before putting the images into the neural network, we need to preprocess our image to eliminate noise. I will show 2 simplest preprocessing steps that we can use on images: edge detection and thresholding.</p>
+<p>Before we want to do edge detection or thresholding, we need to change our image to gray color as gray images are less sensitive to noise.</p>
+<div class="highlight"><pre><span></span><span class="n">hand</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;hand.jpg&quot;</span><span class="p">)</span>
+<span class="n">hand</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">hand</span><span class="p">,</span> <span class="p">(</span><span class="mi">400</span><span class="p">,</span><span class="mi">300</span><span class="p">))</span>
+<span class="c1"># cv2.imshow(&quot;hand&quot;, hand)</span>
+
+<span class="n">gray_hand</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">hand</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2GRAY</span><span class="p">)</span>
+<span class="c1"># cv2.imshow(&quot;Gray&quot;, gray_hand)</span>
+
+<span class="c1"># cv2.waitKey(0)</span>
+<span class="c1"># cv2.destroyAllWindows()</span>
+</pre></div>
+
+
+<h2>1. Edge Detection</h2>
+<p>For edge detection, we are going to use <strong>Canny</strong> function. There are 4 things that we need to include in this function:
+- image
+- minVal: the minimum threshold
+- maxVal: the maximum threshold
+- aperture_size: default is 3
+- L2gradient: default is false</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">edged</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">Canny</span><span class="p">(</span><span class="n">gray_hand</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">),</span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">gray_hand</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Original Image&#39;</span><span class="p">),</span> <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([]),</span> <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">),</span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">edged</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Edge Image&#39;</span><span class="p">),</span> <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([]),</span> <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+
+<p><img alt="png" src="images/output_31_0.png"></p>
+<h2>Thresholding</h2>
+<p>Image thresholding helps us to remove lighter, or darker regions and contours of images. To perform thresholding, we need to deploy <strong>cv2.threshold</strong> function. There are 4 required inputs for this function:
+- image
+- threshold
+- maxVal
+- thresholding method</p>
+<p>There are different threshold flags. I'm going to discuss 5 simplest threshold method:
+- cv2.THRESH_BINARY:
+ + if(r &gt; threshold) : r = maxVal else r = 0
+ + if(g &gt; threshold) : g = maxVal else g = 0
+ + if(b &gt; threshold) : b = maxVal else b = 0
+- cv2.THRESH_BINARY_INV:
+ + if(r &gt; threshold) : r = 0 else r = maxVal 
+ + if(g &gt; threshold) : g = 0 else g = maxVal 
+ + if(b &gt; threshold) : b = 0 else b = maxVal 
+- cv2.THRESH_TRUNC:
+ + if(r &gt; threshold) : r = threshold 
+ + if(g &gt; threshold) : g = threshold 
+ + if(b &gt; threshold) : b = threshold
+- cv2.THRESH_TOZERO:
+ + if(r &lt;= threshold) : r = 0 
+ + if(g &lt;= threshold) : g = 0 
+ + if(b &lt;= threshold) : b = 0
+- cv2.THRESH_TOZERO:
+ + if(r &gt; threshold) : r = 0 
+ + if(g &gt; threshold) : g = 0 
+ + if(b &gt; threshold) : b = 0</p>
+<div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">th1</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">threshold</span><span class="p">(</span><span class="n">gray_hand</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">THRESH_BINARY</span><span class="p">)</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">th2</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">threshold</span><span class="p">(</span><span class="n">gray_hand</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">THRESH_BINARY_INV</span><span class="p">)</span>
+<span class="c1"># Before 127, keep color, after make all become 127</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">th3</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">threshold</span><span class="p">(</span><span class="n">gray_hand</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">THRESH_TRUNC</span><span class="p">)</span>
+<span class="c1"># Before 127, become 0, after same</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">th4</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">threshold</span><span class="p">(</span><span class="n">gray_hand</span><span class="p">,</span> <span class="mi">190</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">THRESH_TOZERO</span><span class="p">)</span>
+<span class="c1"># After 127, become 0, before same</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">th5</span><span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">threshold</span><span class="p">(</span><span class="n">gray_hand</span><span class="p">,</span> <span class="mi">190</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">THRESH_TOZERO_INV</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">231</span><span class="p">),</span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">gray_hand</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Original Image&#39;</span><span class="p">),</span> <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([]),</span> <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">232</span><span class="p">),</span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">th1</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;THRESH_BINARY Image&#39;</span><span class="p">),</span> <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([]),</span> <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">233</span><span class="p">),</span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">th2</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;THRESH_BINARY_INV Image&#39;</span><span class="p">),</span> <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([]),</span> <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">234</span><span class="p">),</span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">th3</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;THRESH_TRUNC Image&#39;</span><span class="p">),</span> <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([]),</span> <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">235</span><span class="p">),</span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">th4</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;THRESH_TOZERO Image&#39;</span><span class="p">),</span> <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([]),</span> <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">236</span><span class="p">),</span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">th5</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;TTHRESH_TOZERO_INV Image&#39;</span><span class="p">),</span> <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([]),</span> <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+
+<p><img alt="png" src="images/output_33_0.png"></p>
+        </div>
+        <div class="post_list">
+            <span>By </span>
+            <!-- <a href="https://mtruongn93.github.io/blog/author/minh-truong.html">@Minh Truong</a> -->
+            <!-- <span> in </span>
+            <span class="post_category"><a href="https://mtruongn93.github.io/blog/category/misc.html" rel="bookmark" title="Permalink to misc">[ misc ]</a></span> -->
+            <span class="post_date">Thu 08 August 2019</span>
+            <div><span>Tags : </span>
+                <span><a href="https://mtruongn93.github.io/blog/tag/python.html">#python, </a></span>
+            </div>
+
+            <div class="entry-social">
+                <span class="twitter"><a target="_blank" rel="nofollow" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=700');return false;" title="Twitter" href="https://twitter.com/share?url=https://mtruongn93.github.io/blog/OpenCV.html&text=Introduction to OpenCV&via=twitter-user-name"><img src="https://mtruongn93.github.io/blog/theme/images/icons/twitter-s.png"></a></span>
+
+                <span class="gplus"><a target="_blank" title="Google +" href="https://plus.google.com/share?url=https://mtruongn93.github.io/blog/OpenCV.html&hl=fr" rel="nofollow" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=650');return false;"><img src="https://mtruongn93.github.io/blog/theme/images/icons/google-s.png"></a></span>
+
+                <span class="facebook"><a target="_blank" title="Facebook" rel="nofollow" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;" href="https://www.facebook.com/sharer.php?u=https://mtruongn93.github.io/blog/OpenCV.html&t=Introduction to OpenCV"><img src="https://mtruongn93.github.io/blog/theme/images/icons/facebook-s.png"></a></span>
+
+                <a  target="_blank" title="Linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=https://mtruongn93.github.io/blog/OpenCV.html&title=Introduction to OpenCV" rel="nofollow" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=650');return false;"><img src="https://mtruongn93.github.io/blog/theme/images/icons/linkedin-s.png"></a>
+
+                <span class="mail"><a href="mailto:?subject=Introduction to OpenCV&amp;body=Viens découvrir un article à propos de [Introduction to OpenCV] sur le site de Minh Truong. https://mtruongn93.github.io/blog/OpenCV.html" title="Share by Email" target="_blank"><img src="https://mtruongn93.github.io/blog/theme/images/icons/mail-s.png"></a></span>
+            </div>
+        </div>
+    </article>
+</section>
+  </article>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      <!-- Blog powered by <a href="http://getpelican.com/">Pelican</a>,
+      which takes great advantage of <a href="http://python.org">Python</a>.
+      Theme <a href="https://github.com/parbhat/pelican-blue">Pelican-Blue</a> by <a href="https://parbhatpuri.com/">@parbhat</a>. -->
+      Copyright © Minh Truong 2019
+
+    </p>
+  </footer>
+
+
+</body>
+</html>
