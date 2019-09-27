@@ -98,12 +98,13 @@
         <h2 class="post_title post_detail"><a href="https://mtruongn93.github.io/blog/web-scraping.html" rel="bookmark" title="Permalink to Web Scraping">Web Scraping</a></h2>
         <div class="entry-content blog-post">
             <p>Sometimes ago, I made an app which simulates a Pokemon game. For this application, I made a predictive model to predict which Pokemon will win based on the data that I have. However, that was not the main thing. In order to create this app, I did a lot of web scraping to get the type, the image or the gif of each Pokemon. Hopefully, through this Pokemon example, you can learn a bit about web scraping.</p>
+<p>The link for my Pokemon app can be found <a href="https://pokemon-lets-fight.herokuapp.com/">here</a></p>
 <h1>Packages</h1>
-<p>Let's start with the package that we need. The 3 main packages that we need will be <code>requests</code>, <code>BeautifulSoup</code> and <code>re</code>.</p>
+<p>Let's start with the package that we need. The 3 main packages that we need will be <strong><code>requests</code></strong>, <strong><code>BeautifulSoup</code></strong> and <strong><code>re</code></strong>.</p>
 <ul>
-<li><code>requests</code> : This package is the most downloaded package of all time. It simplifies the process of making HTTP requests, so that we do not need to manually add query strings to your URLs, or to form-encode your POST data.</li>
-<li><code>BeautifulSoup</code> : FYI, this package has nothing to do with being beautiful and soup :)). It helps us to pull data out of HTML and XML files by navigating, searching, and modifying the parse tree. This is the package that will save us a tremendous amount of time.</li>
-<li><code>re</code> : This package provides regular expression matching operations similar to those found in Perl. It will help us to find certain words that we want. If you do not have any experiences with this, you can check the link <a href="https://www.rexegg.com/regex-quickstart.html">here</a></li>
+<li><strong><code>requests</code></strong> : This package is the most downloaded package of all time. It simplifies the process of making HTTP requests, so that we do not need to manually add query strings to your URLs, or to form-encode your POST data.</li>
+<li><strong><code>BeautifulSoup</code></strong> : FYI, this package has nothing to do with being beautiful and soup :)). It helps us to pull data out of HTML and XML files by navigating, searching, and modifying the parse tree. This is the package that will save us a tremendous amount of time.</li>
+<li><strong><code>re</code></strong> : This package provides regular expression matching operations similar to those found in Perl. It will help us to find certain words that we want. If you do not have any experiences with this, you can check the link <a href="https://www.rexegg.com/regex-quickstart.html">here</a></li>
 </ul>
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
@@ -113,7 +114,7 @@
 
 
 <h1>Let's the fun begin !!!</h1>
-<p>I am going to webscrap everything from <code>https://bulbapedia.bulbagarden.net/wiki/</code>. If you are a Pokemon lover, I am sure you will know about it.</p>
+<p>I am going to webscrap everything from <strong><code>https://bulbapedia.bulbagarden.net/wiki/</code></strong>. If you are a Pokemon lover, I am sure you will know about it.</p>
 <p>In order to get access to any website, we need to use <code>requests</code> package.</p>
 <div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://bulbapedia.bulbagarden.net/wiki/&quot;</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
@@ -128,15 +129,15 @@
 </pre></div>
 
 
-<p>If you see <code>Response [200]</code> like the one above, it means that you have successfully get inside the website.</p>
-<p>After getting in the website, we are going to extract the content of the website by using <code>BeautifulSoup</code>. The content of the website is actually a bunch of HTML/CSS codes that we see when we right click and then inspect the website.</p>
+<p>If you see <strong><code>Response [200]</code></strong> like the one above, it means that you have successfully get inside the website.</p>
+<p>After getting in the website, we are going to extract the content of the website by using <strong><code>BeautifulSoup</code></strong>. The content of the website is actually a bunch of HTML/CSS codes that we see when we right click and then inspect the website.</p>
 <div class="highlight"><pre><span></span><span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 <span class="n">soup</span><span class="o">.</span><span class="n">prettify</span>
 </pre></div>
 
 
 <p><img alt="Pokemon1" src="images\Pokemon1.PNG"></p>
-<p>Assuming we have a list of Pokemon name (Pikachu, Bulbasaur, Mew, .....). Each of these Pokemon will have its own page on <code>Bulbapedia</code>. For example, our favourite Pikachu page will be <code>https://bulbapedia.bulbagarden.net/wiki/Pikachu_(Pokémon)</code>, while Mew page will be <code>https://bulbapedia.bulbagarden.net/wiki/Mew_(Pokémon)</code>. In order to get the data of these Pokemon, we need to actually get into their page and get it.</p>
+<p>Assuming we have a list of Pokemon name (Pikachu, Bulbasaur, Mew, .....). Each of these Pokemon will have its own page on <strong><code>Bulbapedia</code></strong>. For example, our favourite Pikachu page will be <strong><code>https://bulbapedia.bulbagarden.net/wiki/Pikachu_(Pokémon)</code></strong>, while Mew page will be <strong><code>https://bulbapedia.bulbagarden.net/wiki/Mew_(Pokémon)</code></strong>. In order to get the data of these Pokemon, we need to actually get into their page and get it.</p>
 <p><img alt="Pokemon2" src="images\Pokemon2.gif"></p>
 <div class="highlight"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Pikachu&#39;</span>
 <span class="c1"># url + name + &quot;_(Pokémon)&quot; is actually &quot;https://bulbapedia.bulbagarden.net/wiki/&quot; + &quot;Pikachu&quot; + &quot;_(Pokémon)&quot; in this case</span>
@@ -146,7 +147,7 @@
 
 
 <p><img alt="Pokemon3" src="images\Pokemon3.gif"></p>
-<p>Let's try to get the type of Pikachu. As we can see, information of the <code>type</code> is within <code>a</code> tag, with the <code>title</code> includes <code>(type)</code>. We will use <code>find_all</code> to look for <code>a</code> tag including <code>title</code> that has the word <code>(type)</code>.</p>
+<p>Let's try to get the type of Pikachu. As we can see, information of the <strong><code>type</code></strong> is within <strong><code>a</code></strong> tag, with the <strong><code>title</code></strong> includes <strong><code>(type)</code></strong>. We will use <strong><code>find_all</code></strong> to look for <strong><code>a</code></strong> tag including <strong><code>title</code></strong> that has the word <strong><code>(type)</code></strong>.</p>
 <div class="highlight"><pre><span></span><span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span>  <span class="n">title</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;(type)&quot;</span><span class="p">))</span>
 </pre></div>
 
@@ -157,7 +158,7 @@
 </pre></div>
 
 
-<p>We will get a list of a tag following the criteria. Our <code>type</code> information will be always the first one.</p>
+<p>We will get a list of a tag following the criteria. Our <strong><code>type</code></strong> information will be always the first one.</p>
 <div class="highlight"><pre><span></span><span class="n">poke_type</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span>  <span class="n">title</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;(type)&quot;</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
 <span class="n">poke_type</span>
 </pre></div>
@@ -167,7 +168,7 @@
 </pre></div>
 
 
-<p>Let's do the same thing to get Pikachu image. This time, the source of the image is within <code>alt</code> tag containing name of the Pokemon. There will be multiple images of Pikachu within that page; hence, we are going to only get the first one. Also, the link for Pikachu image is within <code>src</code> tag.</p>
+<p>Let's do the same thing to get Pikachu image. This time, the source of the image is within <strong><code>alt</code></strong> tag containing name of the Pokemon. There will be multiple images of Pikachu within that page; hence, we are going to only get the first one. Also, the link for Pikachu image is within <code>src</code> tag.</p>
 <div class="highlight"><pre><span></span><span class="n">img</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;img&quot;</span><span class="p">,</span>  <span class="n">alt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">name</span><span class="p">))[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;src&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;//&quot;</span><span class="p">,</span><span class="s2">&quot;https://&quot;</span><span class="p">)</span>
 <span class="n">img</span>
 </pre></div>

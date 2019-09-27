@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Minh Truong - misc</title><link href="https://mtruongn93.github.io/blog/" rel="alternate"></link><link href="https://mtruongn93.github.io/blog/feeds/misc.atom.xml" rel="self"></link><id>https://mtruongn93.github.io/blog/</id><updated>2019-09-25T10:20:00-04:00</updated><entry><title>Web Scraping</title><link href="https://mtruongn93.github.io/blog/web-scraping.html" rel="alternate"></link><published>2019-09-25T10:20:00-04:00</published><updated>2019-09-25T10:20:00-04:00</updated><author><name>Minh Truong</name></author><id>tag:mtruongn93.github.io,2019-09-25:/blog/web-scraping.html</id><summary type="html">&lt;p&gt;Sometimes ago, I made an app which simulates a Pokemon game. For this application, I made a predictive model to predict which Pokemon will win based on the data that I have. However, that was not the main thing. In order to create this app, I did a lot of …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Sometimes ago, I made an app which simulates a Pokemon game. For this application, I made a predictive model to predict which Pokemon will win based on the data that I have. However, that was not the main thing. In order to create this app, I did a lot of web scraping to get the type, the image or the gif of each Pokemon. Hopefully, through this Pokemon example, you can learn a bit about web scraping.&lt;/p&gt;
+&lt;p&gt;The link for my Pokemon app can be found &lt;a href="https://pokemon-lets-fight.herokuapp.com/"&gt;here&lt;/a&gt;&lt;/p&gt;
 &lt;h1&gt;Packages&lt;/h1&gt;
-&lt;p&gt;Let's start with the package that we need. The 3 main packages that we need will be &lt;code&gt;requests&lt;/code&gt;, &lt;code&gt;BeautifulSoup&lt;/code&gt; and &lt;code&gt;re&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Let's start with the package that we need. The 3 main packages that we need will be &lt;strong&gt;&lt;code&gt;requests&lt;/code&gt;&lt;/strong&gt;, &lt;strong&gt;&lt;code&gt;BeautifulSoup&lt;/code&gt;&lt;/strong&gt; and &lt;strong&gt;&lt;code&gt;re&lt;/code&gt;&lt;/strong&gt;.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;requests&lt;/code&gt; : This package is the most downloaded package of all time. It simplifies the process of making HTTP requests, so that we do not need to manually add query strings to your URLs, or to form-encode your POST data.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;BeautifulSoup&lt;/code&gt; : FYI, this package has nothing to do with being beautiful and soup :)). It helps us to pull data out of HTML and XML files by navigating, searching, and modifying the parse tree. This is the package that will save us a tremendous amount of time.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;re&lt;/code&gt; : This package provides regular expression matching operations similar to those found in Perl. It will help us to find certain words that we want. If you do not have any experiences with this, you can check the link &lt;a href="https://www.rexegg.com/regex-quickstart.html"&gt;here&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;requests&lt;/code&gt;&lt;/strong&gt; : This package is the most downloaded package of all time. It simplifies the process of making HTTP requests, so that we do not need to manually add query strings to your URLs, or to form-encode your POST data.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;BeautifulSoup&lt;/code&gt;&lt;/strong&gt; : FYI, this package has nothing to do with being beautiful and soup :)). It helps us to pull data out of HTML and XML files by navigating, searching, and modifying the parse tree. This is the package that will save us a tremendous amount of time.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;re&lt;/code&gt;&lt;/strong&gt; : This package provides regular expression matching operations similar to those found in Perl. It will help us to find certain words that we want. If you do not have any experiences with this, you can check the link &lt;a href="https://www.rexegg.com/regex-quickstart.html"&gt;here&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;requests&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;bs4&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;BeautifulSoup&lt;/span&gt;
@@ -15,7 +16,7 @@
 
 
 &lt;h1&gt;Let's the fun begin !!!&lt;/h1&gt;
-&lt;p&gt;I am going to webscrap everything from &lt;code&gt;https://bulbapedia.bulbagarden.net/wiki/&lt;/code&gt;. If you are a Pokemon lover, I am sure you will know about it.&lt;/p&gt;
+&lt;p&gt;I am going to webscrap everything from &lt;strong&gt;&lt;code&gt;https://bulbapedia.bulbagarden.net/wiki/&lt;/code&gt;&lt;/strong&gt;. If you are a Pokemon lover, I am sure you will know about it.&lt;/p&gt;
 &lt;p&gt;In order to get access to any website, we need to use &lt;code&gt;requests&lt;/code&gt; package.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;https://bulbapedia.bulbagarden.net/wiki/&amp;quot;&lt;/span&gt;
 &lt;span class="n"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -30,15 +31,15 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;If you see &lt;code&gt;Response [200]&lt;/code&gt; like the one above, it means that you have successfully get inside the website.&lt;/p&gt;
-&lt;p&gt;After getting in the website, we are going to extract the content of the website by using &lt;code&gt;BeautifulSoup&lt;/code&gt;. The content of the website is actually a bunch of HTML/CSS codes that we see when we right click and then inspect the website.&lt;/p&gt;
+&lt;p&gt;If you see &lt;strong&gt;&lt;code&gt;Response [200]&lt;/code&gt;&lt;/strong&gt; like the one above, it means that you have successfully get inside the website.&lt;/p&gt;
+&lt;p&gt;After getting in the website, we are going to extract the content of the website by using &lt;strong&gt;&lt;code&gt;BeautifulSoup&lt;/code&gt;&lt;/strong&gt;. The content of the website is actually a bunch of HTML/CSS codes that we see when we right click and then inspect the website.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;soup&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;BeautifulSoup&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;soup&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;prettify&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;&lt;img alt="Pokemon1" src="images\Pokemon1.PNG"&gt;&lt;/p&gt;
-&lt;p&gt;Assuming we have a list of Pokemon name (Pikachu, Bulbasaur, Mew, .....). Each of these Pokemon will have its own page on &lt;code&gt;Bulbapedia&lt;/code&gt;. For example, our favourite Pikachu page will be &lt;code&gt;https://bulbapedia.bulbagarden.net/wiki/Pikachu_(Pokémon)&lt;/code&gt;, while Mew page will be &lt;code&gt;https://bulbapedia.bulbagarden.net/wiki/Mew_(Pokémon)&lt;/code&gt;. In order to get the data of these Pokemon, we need to actually get into their page and get it.&lt;/p&gt;
+&lt;p&gt;Assuming we have a list of Pokemon name (Pikachu, Bulbasaur, Mew, .....). Each of these Pokemon will have its own page on &lt;strong&gt;&lt;code&gt;Bulbapedia&lt;/code&gt;&lt;/strong&gt;. For example, our favourite Pikachu page will be &lt;strong&gt;&lt;code&gt;https://bulbapedia.bulbagarden.net/wiki/Pikachu_(Pokémon)&lt;/code&gt;&lt;/strong&gt;, while Mew page will be &lt;strong&gt;&lt;code&gt;https://bulbapedia.bulbagarden.net/wiki/Mew_(Pokémon)&lt;/code&gt;&lt;/strong&gt;. In order to get the data of these Pokemon, we need to actually get into their page and get it.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Pokemon2" src="images\Pokemon2.gif"&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Pikachu&amp;#39;&lt;/span&gt;
 &lt;span class="c1"&gt;# url + name + &amp;quot;_(Pokémon)&amp;quot; is actually &amp;quot;https://bulbapedia.bulbagarden.net/wiki/&amp;quot; + &amp;quot;Pikachu&amp;quot; + &amp;quot;_(Pokémon)&amp;quot; in this case&lt;/span&gt;
@@ -48,7 +49,7 @@
 
 
 &lt;p&gt;&lt;img alt="Pokemon3" src="images\Pokemon3.gif"&gt;&lt;/p&gt;
-&lt;p&gt;Let's try to get the type of Pikachu. As we can see, information of the &lt;code&gt;type&lt;/code&gt; is within &lt;code&gt;a&lt;/code&gt; tag, with the &lt;code&gt;title&lt;/code&gt; includes &lt;code&gt;(type)&lt;/code&gt;. We will use &lt;code&gt;find_all&lt;/code&gt; to look for &lt;code&gt;a&lt;/code&gt; tag including &lt;code&gt;title&lt;/code&gt; that has the word &lt;code&gt;(type)&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Let's try to get the type of Pikachu. As we can see, information of the &lt;strong&gt;&lt;code&gt;type&lt;/code&gt;&lt;/strong&gt; is within &lt;strong&gt;&lt;code&gt;a&lt;/code&gt;&lt;/strong&gt; tag, with the &lt;strong&gt;&lt;code&gt;title&lt;/code&gt;&lt;/strong&gt; includes &lt;strong&gt;&lt;code&gt;(type)&lt;/code&gt;&lt;/strong&gt;. We will use &lt;strong&gt;&lt;code&gt;find_all&lt;/code&gt;&lt;/strong&gt; to look for &lt;strong&gt;&lt;code&gt;a&lt;/code&gt;&lt;/strong&gt; tag including &lt;strong&gt;&lt;code&gt;title&lt;/code&gt;&lt;/strong&gt; that has the word &lt;strong&gt;&lt;code&gt;(type)&lt;/code&gt;&lt;/strong&gt;.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;soup&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;find_all&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;a&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="n"&gt;title&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;re&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;compile&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;(type)&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -59,7 +60,7 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;We will get a list of a tag following the criteria. Our &lt;code&gt;type&lt;/code&gt; information will be always the first one.&lt;/p&gt;
+&lt;p&gt;We will get a list of a tag following the criteria. Our &lt;strong&gt;&lt;code&gt;type&lt;/code&gt;&lt;/strong&gt; information will be always the first one.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;poke_type&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;soup&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;find_all&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;a&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="n"&gt;title&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;re&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;compile&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;(type)&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt;
 &lt;span class="n"&gt;poke_type&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -69,7 +70,7 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Let's do the same thing to get Pikachu image. This time, the source of the image is within &lt;code&gt;alt&lt;/code&gt; tag containing name of the Pokemon. There will be multiple images of Pikachu within that page; hence, we are going to only get the first one. Also, the link for Pikachu image is within &lt;code&gt;src&lt;/code&gt; tag.&lt;/p&gt;
+&lt;p&gt;Let's do the same thing to get Pikachu image. This time, the source of the image is within &lt;strong&gt;&lt;code&gt;alt&lt;/code&gt;&lt;/strong&gt; tag containing name of the Pokemon. There will be multiple images of Pikachu within that page; hence, we are going to only get the first one. Also, the link for Pikachu image is within &lt;code&gt;src&lt;/code&gt; tag.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;img&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;soup&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;find_all&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;img&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="n"&gt;alt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;re&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;compile&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;))[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;src&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;//&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;https://&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;img&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
